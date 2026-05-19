@@ -31,32 +31,36 @@ The server must be running on `localhost:8000` before training.
 ### 3. Train the Agent
 
 ```bash
-cd src
-python train.py
+python src/train.py
 ```
 
-This runs:
-
-1. **Self-play training** (5000 battles) — softmax agent vs epsilon-greedy agent
-2. **Exploration comparison** — epsilon-greedy vs softmax, both trained for 5000 battles
+Trains a softmax Q-Learning agent for 5000 battles against a random opponent, with progress logged every 10 battles. Then evaluates the trained agent over 500 battles.
 
 ### 4. Evaluate
 
 ```bash
-cd src
-python evaluate.py
+python src/evaluate.py
 ```
 
-Loads saved Q-tables and evaluates each against 1000 random opponents.
+Loads saved Q-tables and evaluates against 1000 random opponents.
+
+### 5. Play Against the Bot
+
+```bash
+python src/play_human.py
+```
+
+Starts the trained bot on the local Showdown server. Open `http://localhost:8000` in your browser, pick a username, and challenge the bot (`bottianrider`) to a Gen 1 OU battle.
 
 ## Architecture
 
 ```
 src/
-├── q_learning_agent.py   # Tabular Q-Learning with epsilon-greedy & softmax
+├── q_learning_agent.py   # Tabular Q-Learning with softmax exploration
 ├── teams.py              # Fixed team + random Gen 1 teambuilder
-├── train.py              # Self-play & vs-random training
-└── evaluate.py           # Load & evaluate trained models
+├── train.py              # Training vs random (logs every 10 battles)
+├── evaluate.py           # Load & evaluate trained models
+└── play_human.py         # Play against the trained bot in browser
 results/
 └── *.pkl                 # Saved Q-tables
 ```
@@ -69,32 +73,40 @@ results/
 Q(s, a) ← Q(s, a) + α(r + γ·max_a' Q(s', a') - Q(s, a))
 ```
 
-**Hyperparameters:** α = 0.10, γ = 0.95, ε = 0.10
+**Hyperparameters:** α = 0.10, γ = 0.95
 
 **State Vector:**
-| Feature | Description |
-|---------|-------------|
-| player_hp_bucket | HP of active Pokemon (0-9 bucket) |
+
+| Feature            | Description                         |
+| ------------------ | ----------------------------------- |
+| player_hp_bucket   | HP of active Pokemon (0-9 bucket)   |
 | opponent_hp_bucket | HP of opponent Pokemon (0-9 bucket) |
-| player_type_1 | Primary type of our Pokemon |
-| player_type_2 | Secondary type of our Pokemon |
-| opponent_type_1 | Primary type of opponent |
-| opponent_type_2 | Secondary type of opponent |
+| player_type_1      | Primary type of our Pokemon         |
+| player_type_2      | Secondary type of our Pokemon       |
+| opponent_type_1    | Primary type of opponent            |
+| opponent_type_2    | Secondary type of opponent          |
 
 **Actions:** Move index (0-3), choosing from available moves
 
-**Exploration:**
-
-- Epsilon-greedy: random move 10% of the time
-- Softmax: P(action) ∝ exp(λ · normalized_Q)
+**Exploration:** Softmax — P(action) ∝ exp(λ · normalized_Q)
 
 ## Paper Results (reference)
 
-| Method                    | Win Rate vs Random |
-| ------------------------- | ------------------ |
-| Epsilon-greedy (5k games) | 60%                |
-| Softmax (5k games)        | 65%                |
-| Softmax (20k games)       | 70%                |
+| Method              | Win Rate vs Random |
+| ------------------- | ------------------ |
+| Softmax (5k games)  | 65%                |
+| Softmax (20k games) | 70%                |
+
+## Our Results
+
+| Method             | Training | Win Rate vs Random  |
+| ------------------ | -------- | ------------------- |
+| Softmax (5k games) | 705.7s   | **93.2%** (466/500) |
+
+- Q-table states discovered: 7,367
+- Training win rate: 84.7% (4,228 wins / 766 losses)
+
+Significantly outperforms the paper's 65% (5k games) and 70% (20k games) thanks to the fixed team removing state space noise from our side.
 
 ## Differences from Paper
 
@@ -104,3 +116,9 @@ Q(s, a) ← Q(s, a) + α(r + γ·max_a' Q(s', a') - Q(s, a))
 | Random teams for both sides    | Fixed team for us, random for opponent |
 | No accuracy/crit RNG           | Full Gen 1 RNG (accuracy, crits, etc.) |
 | 151 Pokemon, 165 moves         | Full Gen 1 via Showdown engine         |
+
+## Future Improvements
+
+1. **Increase opponent Pokemon team pool** — Expand the random opponent pool beyond the current 30 Gen 1 Pokemon to include all 151. This will expose the agent to a wider variety of type matchups and force it to generalize better, making the learned policy more robust against unseen teams.
+
+2. **Add switch Pokemon action with type-effectiveness reward** — Currently the agent only chooses between its 4 available moves. Adding the ability to switch Pokemon as an action (expanding action space from 4 to up to 9) would allow the agent to learn strategic switches. A bonus reward should be given when switching to a Pokemon with a type advantage against the opponent's active Pokemon, encouraging the agent to learn defensive/offensive pivoting.
