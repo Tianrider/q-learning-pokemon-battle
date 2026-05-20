@@ -1,10 +1,3 @@
-"""
-Training script for the Q-Learning Pokemon battle agent.
-
-Trains using a fixed team for our agent and random teams for opponents.
-Uses softmax exploration with Q-Learning (best approach from the paper).
-"""
-
 import asyncio
 import os
 import sys
@@ -27,21 +20,9 @@ async def train(
     log_interval: int = 10,
     save_path: str | None = None,
 ):
-    """
-    Train Q-Learning agent (softmax) against a random opponent.
-
-    Our agent uses a FIXED team.
-    The opponent uses RANDOM Gen 1 teams each battle.
-    Logs progress every `log_interval` battles.
-    """
-    print("=" * 60)
     print("Training Q-Learning Agent (Softmax)")
     print(f"  Training battles: {n_training_battles}")
     print(f"  Eval battles:     {n_eval_battles}")
-    print(f"  Log interval:     every {log_interval} battles")
-    print(f"  Format:           {BATTLE_FORMAT}")
-    print(f"  Our team:         FIXED (Alakazam/Snorlax/Tauros/Starmie/Exeggutor/Chansey)")
-    print(f"  Opponent team:    RANDOM (from Gen 1 pool)")
     print("=" * 60)
 
     # Create our Q-Learning agent with FIXED team

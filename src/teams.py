@@ -278,10 +278,7 @@ Level: 100
 - Body Slam""",
 ]
 
-
 class FixedTeambuilder(Teambuilder):
-    """Always returns the same fixed team."""
-
     def __init__(self, team_str: str):
         super().__init__()
         self._team = self.join_team(self.parse_showdown_team(team_str))
@@ -291,8 +288,6 @@ class FixedTeambuilder(Teambuilder):
 
 
 class RandomGen1Teambuilder(Teambuilder):
-    """Builds random Gen 1 teams from the Pokemon pool each battle."""
-
     def __init__(self, pool: list[str] | None = None):
         super().__init__()
         self.pool = pool or GEN1_POKEMON_POOL

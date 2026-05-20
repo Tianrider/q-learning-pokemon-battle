@@ -1,0 +1,196 @@
+{
+  "kode_kelompok": "K15",
+  "topik_pilihan": 5,
+  "nama_topik": "Reinforcement Learning",
+  "judul_proyek": "Optimisasi Strategi Pertarungan Pokemon dengan Q-Learning pada Pokemon Showdown",
+  "abstrak_singkat": "Proyek ini melatih agen Q-Learning dengan eksplorasi softmax untuk menentukan strategi battle optimal pada Pokemon Showdown format Gen 1 OU. Kami menggunakan tim tetap (Alakazam, Snorlax, Tauros, Starmie, Exeggutor, Chansey) melawan lawan dengan tim acak dari pool 30 Pokemon Gen 1. State direpresentasikan sebagai tuple (HP bucket kedua pemain, tipe kedua Pokemon aktif). Setelah 5000 battle training, agen mencapai win rate 93.2% (466/500) pada evaluasi vs random opponent, jauh melampaui hasil paper referensi (65-70%). Peningkatan signifikan ini disebabkan oleh penggunaan tim tetap yang mengurangi noise pada state space.",
+
+  "metode_ai": [
+    {
+      "nama": "Q-Learning",
+      "peran": "utama",
+      "varian": "Tabular Q-Learning dengan softmax exploration (lambda=1.0), alpha=0.10, gamma=0.95, state=tuple(hp_bucket, types)",
+      "catatan": "Algoritma utama yang dilatih selama 5000 battle. Menggunakan Q-table berbasis dictionary dengan state encoding berupa HP bucket (0-9) dan tipe Pokemon aktif kedua pemain."
+    },
+    {
+      "nama": "Random Player (Bot Basic Pokemon Showdown)",
+      "peran": "pembanding",
+      "varian": "poke-env RandomPlayer yang memilih move secara uniform random",
+      "catatan": "Baseline non-learning sebagai lawan training dan evaluasi. Menggunakan tim acak dari pool 30 Pokemon Gen 1."
+    }
+  ],
+
+  "frameworks": [
+    {
+      "nama": "poke-env",
+      "versi": "0.15",
+      "kegunaan": "Interface Python untuk berinteraksi dengan Pokemon Showdown server (battle management, state parsing, action execution)"
+    },
+    {
+      "nama": "NumPy",
+      "versi": "1.24",
+      "kegunaan": "Operasi numerik untuk Q-table, softmax probability computation, dan action selection"
+    },
+    {
+      "nama": "Pokemon Showdown",
+      "versi": "latest",
+      "kegunaan": "Game server yang mensimulasikan pertarungan Pokemon Gen 1 OU dengan full RNG mechanics (accuracy, crits, speed ties)"
+    }
+  ],
+
+  "datasets": [
+    {
+      "nama": "Pokemon Showdown Gen 1 OU (via poke-env)",
+      "tipe": "environment",
+      "sumber": "Pokemon Showdown server dijalankan secara lokal",
+      "url_sumber_publik": "https://github.com/smogon/pokemon-showdown",
+      "jumlah_sampel": 0,
+      "jumlah_kelas": 0,
+      "proses_akuisisi_mandiri": "",
+      "peran_di_proyek": "Environment utama untuk training dan evaluasi agen Q-Learning. Server dijalankan lokal pada localhost:8000.",
+      "spek_rl": {
+        "state_space": "Tuple(player_hp_bucket[0-9], opp_hp_bucket[0-9], player_type1, player_type2, opp_type1, opp_type2) - diskrit, 7367 state unik di discovered dalam 5000 battle training",
+        "action_space": "Discrete(4) - indeks move yang tersedia (0-3)",
+        "reward_function": "+100 menang, -100 kalah, intermediate: (my_hp_fraction - opp_hp_fraction) * 5.0 per langkah",
+        "max_episode_steps": null,
+        "framework_env": "poke-env 0.15 (wrapper Pokemon Showdown WebSocket)",
+        "modifikasi_tim": "Tim agen tetap (6 Pokemon OU tier), tim lawan diacak dari pool 30 Pokemon Gen 1 yang dikurasi tim."
+      }
+    }
+  ],
+
+  "metrik_utama": [
+    "Win rate vs Random opponent (evaluasi 500 battle)",
+    "Training win rate (konvergensi selama 5000 battle)",
+    "Jumlah Q-table states discovered",
+    "Training time (detik)"
+  ],
+
+  "klaim_bonus": ["B1"],
+
+  "anggota": [
+    {
+      "nama": "Falah Andhersyo",
+      "npm": "2306161990",
+      "peran_utama": "Training Pipeline",
+      "focus_area": [
+        "Alur eksekusi training",
+        "Konfigurasi eksperimen",
+        "Pencatatan win rate",
+        "Penyimpanan Q-table"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "Async battle loop dengan poke-env (asyncio)",
+        "Batch training dengan periodic logging",
+        "Konfigurasi eksperimen (n_battles, log_interval, hyperparameters)",
+        "Q-table serialization dengan pickle"
+      ],
+      "konsep_dikuasai_teori": [
+        "Training vs evaluation mode dalam RL",
+        "Greedy policy extraction dari Q-table",
+        "Sample efficiency dan konvergensi",
+        "Separation of training dan evaluation untuk unbiased estimate"
+      ],
+      "bagian_laporan": ["Subbab topik yang dipilih", "Studi literatur"],
+      "bagian_kode": ["src/train.py"]
+    },
+    {
+      "nama": "Bonifasius Raditya Pandu Hendrianto",
+      "npm": "2306242350",
+      "peran_utama": "Evaluator",
+      "focus_area": [
+        "Alur evaluasi model terlatih",
+        "Pemuatan Q-table",
+        "Pengujian greedy policy melawan lawan acak",
+        "Pengukuran dan perbandingan win rate antar Q-table"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "Multi Q-table evaluation dari saved models",
+        "Win rate computation over large battle sets (1000 battles)",
+        "Greedy policy deployment tanpa exploration",
+        "Perbandingan hasil antar Q-table yang tersimpan"
+      ],
+      "konsep_dikuasai_teori": [
+        "Evaluasi agen RL: importance of large sample size",
+        "Perbandingan dengan baseline non-learning",
+        "Stochasticity dalam evaluasi (RNG game mechanics)",
+        "Interpretasi performa evaluasi"
+      ],
+      "bagian_laporan": [
+        "Implementasi model sementara",
+        "Ringkasan status per tahap",
+        "Dataset & pra-pemrosesan",
+        "Implementasi model"
+      ],
+      "bagian_kode": ["src/evaluate.py"]
+    },
+    {
+      "nama": "Christian Hadiwijaya",
+      "npm": "2306161952",
+      "peran_utama": "RL Algorithm",
+      "focus_area": [
+        "Implementasi utama Q-learning agent",
+        "Representasi state & pemilihan action",
+        "Mekanisme softmax exploration",
+        "Pembaruan nilai Q & penyimpanan/pemuatan Q-table"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "Q-Learning update rule: Q(s,a) <- Q(s,a) + alpha*(r + gamma*max Q(s',a') - Q(s,a))",
+        "Softmax action selection dengan temperature parameter",
+        "State representation: HP bucket discretization & type encoding",
+        "Terminal reward (+100/-100) dan intermediate reward (HP differential)"
+      ],
+      "konsep_dikuasai_teori": [
+        "Temporal Difference Learning & konvergensi Q-Learning",
+        "Exploration vs exploitation tradeoff (softmax vs epsilon-greedy)",
+        "Tabular RL dan limitasi pada large state space",
+        "Markov Decision Process: state, action, reward, transition"
+      ],
+      "bagian_laporan": ["Ringkasan eksekutif", "Hasil eksperimen"],
+      "bagian_kode": ["src/q_learning_agent.py", "src/teams.py"]
+    },
+    {
+      "nama": "Jonathan Frederick Kosasih",
+      "npm": "2306225981",
+      "peran_utama": "Human Interface & Demo",
+      "focus_area": [
+        "Dataset Pokemon untuk tim lawan",
+        "Konstruksi tim tetap untuk agent",
+        "Pemilihan tim lawan secara acak",
+        "Logika simulasi interaksi pemain manusia dengan agent"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "poke-env player setup untuk human challenge mode",
+        "WebSocket connection ke Pokemon Showdown lokal",
+        "Loading trained Q-table untuk live play",
+        "Performa dan optimasi susunan tim terhadap win rate"
+      ],
+      "konsep_dikuasai_teori": [
+        "Deployment agen RL ke environment real-time",
+        "Human evaluation sebagai qualitative assessment",
+        "Client-server architecture Pokemon Showdown",
+        "Pengaruh komposisi tim terhadap hasil pertarungan"
+      ],
+      "bagian_laporan": ["Rumusan masalah", "Ruang lingkup & batasan"],
+      "bagian_kode": ["src/play_human.py"]
+    }
+  ],
+
+  "tautan": {
+    "github": "https://github.com/Tianrider/q-learning-pokemon-battle",
+    "colab": "",
+    "dataset_mandiri": null,
+    "video_demo": null
+  },
+
+  "ai_assistant_usage": {
+    "digunakan": true,
+    "tools": ["Claude Opus 4.6, Gemini 3.1 Pro"],
+    "bagian": [
+      "Generating random Pokemon pool dengan viable movesets untuk src/teams.py (GEN1_POKEMON_POOL: 30 Pokemon Gen 1 dengan moveset kompetitif)",
+      "Debugging",
+      "Mencari paper referensi tentang RL di Pokemon Showdown untuk studi literatur"
+    ],
+    "estimasi_persentase": 15
+  }
+}
