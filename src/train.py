@@ -20,12 +20,16 @@ async def train(
     log_interval: int = 10,
     save_path: str | None = None,
 ):
+    print("=" * 60)
     print("Training Q-Learning Agent (Softmax)")
     print(f"  Training battles: {n_training_battles}")
     print(f"  Eval battles:     {n_eval_battles}")
+    print(f"  Log interval:     every {log_interval} battles")
+    print(f"  Format:           {BATTLE_FORMAT}")
+    print(f"  Our team:         FIXED (Alakazam/Snorlax/Tauros/Starmie/Exeggutor/Chansey)")
+    print(f"  Opponent team:    RANDOM (from Gen 1 pool)")
     print("=" * 60)
 
-    # Create our Q-Learning agent with FIXED team
     agent = QLearningAgent(
         alpha=0.10,
         gamma=0.95,
@@ -43,7 +47,6 @@ async def train(
         max_concurrent_battles=1,
     )
 
-    # --- TRAINING PHASE (with progress logging) ---
     print(f"\n[TRAINING] Starting...")
     start_time = time.time()
     battles_done = 0
@@ -70,7 +73,6 @@ async def train(
     print(f"  Training win rate: {stats['training_win_rate']*100:.1f}%")
     print(f"  Wins: {stats['training_wins']}, Losses: {stats['training_losses']}")
 
-    # --- EVALUATION PHASE ---
     print(f"\n[EVALUATION] Running {n_eval_battles} battles (greedy policy)...")
     agent.training = False
     agent._prev_state = None
@@ -90,7 +92,6 @@ async def train(
     print(f"\n[RESULTS]")
     print(f"  Win rate vs Random: {win_rate:.1f}% ({eval_wins}/{n_eval_battles})")
 
-    # --- SAVE Q-TABLE ---
     if save_path:
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
         agent.save_q_table(save_path)
@@ -98,9 +99,7 @@ async def train(
 
     return agent, win_rate
 
-
 async def main():
-    """Run training."""
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
     await train(
@@ -109,7 +108,6 @@ async def main():
         log_interval=10,
         save_path=os.path.join(RESULTS_DIR, "q_table_softmax.pkl"),
     )
-
 
 if __name__ == "__main__":
     asyncio.run(main())
