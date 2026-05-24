@@ -1,13 +1,6 @@
-"""
-Fixed Gen 1 team for the Q-Learning agent and a random teambuilder for opponents.
-
-Using gen1ou format so we can control our team while randomizing the opponent's.
-"""
-
 import random
 from poke_env.teambuilder import Teambuilder
 
-# A strong, balanced Gen 1 OU team (fixed for our agent)
 FIXED_TEAM = """
 Alakazam
 Ability: No Ability
@@ -64,7 +57,6 @@ EVs: 252 HP / 252 SpD / 4 Def
 - Thunderbolt
 """
 
-# Pool of Gen 1 Pokemon with viable movesets for random opponent teams
 GEN1_POKEMON_POOL = [
     """Venusaur
 Ability: No Ability
@@ -277,6 +269,7 @@ Level: 100
 - Rest
 - Body Slam""",
 ]
+
 
 class FixedTeambuilder(Teambuilder):
     def __init__(self, team_str: str):
