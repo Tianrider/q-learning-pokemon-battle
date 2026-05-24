@@ -52,6 +52,20 @@ python src/play_human.py
 
 Starts the trained bot on the local Showdown server. Open `http://localhost:8000` in your browser, pick a username, and challenge the bot (`bottianrider`) to a Gen 1 OU battle.
 
+### 6. Visualize Training Results
+
+```bash
+python src/visualize_training.py --input results/q_table_softmax.pkl
+```
+
+You can also use a CSV training log (if available):
+
+```bash
+python src/visualize_training.py --input results/training_log.csv
+```
+
+Plots are saved under `results/plots/plot_[input_name]/`.
+
 ## Architecture
 
 ```
@@ -60,9 +74,11 @@ src/
 ├── teams.py              # Fixed team + random Gen 1 teambuilder
 ├── train.py              # Training vs random (logs every 10 battles)
 ├── evaluate.py           # Load & evaluate trained models
+├── visualize_training.py # Generate visualize plot for training (pkl)
 └── play_human.py         # Play against the trained bot in browser
 results/
-└── *.pkl                 # Saved Q-tables
+├── *.pkl                 # Saved Q-tables
+└── plots/                # Generated visualization outputs
 ```
 
 ## Algorithm (from paper)
@@ -101,10 +117,10 @@ Q(s, a) ← Q(s, a) + α(r + γ·max_a' Q(s', a') - Q(s, a))
 
 | Method             | Training | Win Rate vs Random  |
 | ------------------ | -------- | ------------------- |
-| Softmax (5k games) | 705.7s   | **93.2%** (466/500) |
+| Softmax (5k games) | 571.3s   | **93.4%** (467/500) |
 
-- Q-table states discovered: 7,367
-- Training win rate: 84.7% (4,228 wins / 766 losses)
+- Q-table states discovered: 7311
+- Training win rate: 86.4% (4320 wins / 678 losses)
 
 Significantly outperforms the paper's 65% (5k games) and 70% (20k games) thanks to the fixed team removing state space noise from our side.
 
