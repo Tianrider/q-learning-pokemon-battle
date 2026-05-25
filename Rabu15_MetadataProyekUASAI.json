@@ -1,0 +1,265 @@
+{
+  "kode_kelompok": "Rabu-15",
+  "topik_pilihan": 5,
+  "nama_topik": "Reinforcement Learning",
+  "judul_proyek": "Implementasi Reinforcement Learning Menggunakan Q-learning padaStrategi Pertarungan Pokemon Battle",
+  "abstrak_singkat": "Pertarungan Pokemon battle dimodelkan sebagai masalahpengambilan keputusan sekuensial menggunakan tabular Q-learning dengan eksplorasisoftmax pada simulator Pokemon Showdown. Agen menggunakan fixed team Gen 1 OU berisiAlakazam, Snorlax, Tauros, Starmie, Exeggutor, dan Chansey, sementara lawan dipilihsecara acak dari custom opponent pool berisi 50 Pokemon Gen 1. Statedirepresentasikan sebagai tuple diskret 6 elemen yang mencakup HP bucket dan tipePokemon aktif, action berupa pemilihan maksimal 4 move yang tersedia, dan rewardmenggunakan terminal reward serta modular reward shaping yang mencakup damage,damage taken, KO, faint, status condition, time penalty, dan potential-based reward.Pada baseline 8.000 training battle dan 500 evaluation battle, agen mencapaitraining win rate 86,8%, evaluation win rate 94,8%, dan menemukan 9.772 Q-tablestates. Setelah hyperparameter tuning, konfigurasi terbaik lam_2.0 dengan alpha=010, gamma=0.95, dan lambda=2.0 mencapai evaluation win rate 96,8%.",
+  "metode_ai": [
+      {
+      "nama": "Tabular Q-learning",
+      "peran": "utama",
+      "varian": "Q-learning berbasis Q-table dictionary dengan state diskret 6 elemen dan action berupa indeks move 0-3",
+      "catatan": "Algoritma utama untuk melatih agent memilih move terbaik berdasarkan nilai Q pada state pertarungan. Baseline menggunakan alpha=0.10, gamma=0.95, dan softmax lambda=1.0."
+      },
+      {
+      "nama": "Softmax exploration",
+      "peran": "strategi eksplorasi saat training",
+      "varian": "Pemilihan action berbasis probabilitas softmax terhadap nilai Q yang dinormalisasi secara lokal",
+      "catatan": "Digunakan agar agent tetap mengeksplorasi action alternatif selama training, tetapi tetap memberi probabilitas lebih tinggi pada action dengan nilai Q lebih baik. Tuning menunjukkan lambda=2.0 sebagai konfigurasi terbaik."
+      },
+      {
+      "nama": "Greedy policy",
+      "peran": "strategi evaluasi",
+      "varian": "Argmax terhadap nilai Q pada action yang valid di state saat ini",
+      "catatan": "Digunakan pada fase evaluation agar performa policy yang sudah dipelajari dapat diukur tanpa eksplorasi."
+      },
+      {
+      "nama": "RandomPlayer",
+      "peran": "baseline opponent",
+      "varian": "Opponent non-learning dari poke-env yang memilih move secara acak",
+      "catatan": "Digunakan sebagai lawan utama pada training dan evaluation. Evaluasi terhadap RandomPlayer menjadi dasar metrik win rate proyek."
+      }
+  ],
+  "frameworks": [
+      {
+      "nama": "Python",
+      "versi": "3.11",
+      "kegunaan": "Bahasa utama untuk implementasi training, evaluation, Q-learning agent, visualisasi, hyperparameter tuning, dan human-vs-AI mode"
+      },
+      {
+      "nama": "poke-env",
+      "versi": ">=0.15.0",
+      "kegunaan": "Interface Python untuk menghubungkan agent dengan Pokemon Showdown melalui WebSocket, membaca state battle, dan mengeksekusi action"
+      },
+      {
+      "nama": "NumPy",
+      "versi": ">=1.24.0",
+      "kegunaan": "Operasi numerik untuk Q-table, softmax probability computation, action selection, dan pengolahan hasil eksperimen"
+      },
+      {
+      "nama": "Pokemon Showdown",
+      "versi": "local server",
+      "kegunaan": "Simulator battle Gen 1 OU sebagai environment reinforcement learning dengan mekanika stokastik seperti accuracy, critical hit, dan speed tie"
+      },
+      {
+      "nama": "Matplotlib",
+      "versi": "tidak dispesifikkan",
+      "kegunaan": "Visualisasi hasil hyperparameter tuning, kurva training, distribusi nilai Q, state value, dan distribusi action terbaik"
+      },
+      {
+      "nama": "Node.js",
+      "versi": "tidak dispesifikkan",
+      "kegunaan": "Menjalankan server lokal Pokemon Showdown sebagai environment battle"
+      }
+  ],
+  "datasets": [
+      {
+      "nama": "Custom Opponent Pool Pokemon Gen 1",
+      "tipe": "dataset_mandiri",
+      "sumber": "Custom opponent pool berisi 50 Pokemon Gen 1 yang disusun untuk membangkitkan tim lawan secara acak; Claude Opus 4.6 digunakan sebagai bantuan awal dalam pembuatan pool dan moveset",
+      "url_sumber_publik": "",
+      "jumlah_sampel": 50,
+      "jumlah_kelas": 0,
+      "proses_akuisisi_mandiri": "Tim menggunakan custom opponent pool berisi 50 Pokemon Gen 1 sebagai basis pembentukan tim lawan. Pada setiap battle, 6 Pokemon diambil secara random sampling dari pool tersebut. Pool ini digunakan untuk memberi variasi matchup selama training dan evaluation. Claude Opus 4.6 digunakan sebagai alat bantu untuk menghasilkan referensi pool/moveset, sementara penyesuaian eksperimen dan integrasi ke kode dilakukan oleh tim.",
+      "peran_di_proyek": "Menjadi sumber variasi lawan untuk training dan evaluation serta mendukung klaim bonus B2 sebagai dataset mandiri/custom opponent pool.",
+      "spek_rl": {
+          "state_space": "Tuple diskret 6 elemen: (player_hp_bucket, opp_hp_bucket, player_type_1, player_type_2, opp_type_1, opp_type_2). Secara teoritis 10 x 10 x 15 x 16 x 15 x 16 = 5.760.000 kombinasi; baseline menemukan 9.772 state unik.",
+          "action_space": "Discrete maksimal 4 action, yaitu memilih salah satu move yang tersedia pada giliran tersebut.",
+          "reward_function": "Terminal reward +100 untuk menang dan -100 untuk kalah; intermediate modular reward terdiri atas damage reward, taken penalty, KO bonus, faint penalty, status bonus, time penalty, dan potential-based reward shaping yang di-clip ke [-50, +50].",
+          "max_episode_steps": "Satu episode berlangsung hingga satu battle selesai.",
+          "framework_env": "Pokemon Showdown melalui poke-env.",
+          "modifikasi_tim": "Agent menggunakan fixed team Gen 1 OU; opponent team dibuat acak dari custom opponent pool 50 Pokemon Gen 1."
+      }
+      },
+      {
+      "nama": "Pokemon Showdown Gen 1 OU Battle Experience",
+      "tipe": "environment_generated_experience",
+      "sumber": "Interaksi online antara agent dan server lokal Pokemon Showdown melalui poke-env",
+      "url_sumber_publik": "https://github.com/smogon/pokemon-showdown",
+      "jumlah_sampel": 0,
+      "jumlah_kelas": 0,
+      "proses_akuisisi_mandiri": "Data pengalaman tidak dikumpulkan sebagai dataset statis, tetapi dihasilkan selama agent melakukan battle berulang dengan opponent. Setiap state-action-reward transition menjadi sampel pembelajaran untuk memperbarui Q-table.",
+      "peran_di_proyek": "Environment utama untuk training, evaluation, hyperparameter tuning, dan demo human-vs-AI.",
+      "spek_rl": {
+          "state_space": "State battle dari Pokemon Showdown diproses menjadi tuple diskret HP bucket dan tipe Pokemon aktif.",
+          "action_space": "Move yang valid pada setiap turn, dipetakan ke indeks action 0-3.",
+          "reward_function": "Reward dihitung dari hasil turn dan hasil akhir battle menggunakan terminal reward serta modular reward shaping.",
+          "max_episode_steps": "Sampai battle selesai.",
+          "framework_env": "poke-env wrapper untuk Pokemon Showdown WebSocket.",
+          "modifikasi_tim": "Server lokal digunakan untuk format gen1ou; agent fixed team dan opponent random team dari custom opponent pool."
+      }
+      }
+  ],
+  "metrik_utama": [
+      "Evaluation win rate vs RandomPlayer (500 greedy evaluation battles)",
+      "Training win rate selama 8.000 training battles",
+      "Jumlah Q-table states yang ditemukan",
+      "Training time dalam detik",
+      "Perbandingan win rate terhadap paper acuan Kalose et al.",
+      "Hasil hyperparameter tuning terhadap alpha, gamma, dan lambda",
+      "Distribusi nilai Q, state value, dan distribusi action terbaik per state"
+  ],
+  "klaim_bonus": [
+      "B1",
+      "B2",
+      "B3"
+  ],
+  "anggota": [
+      {
+      "nama": "Falah Andhesryo",
+      "npm": "2306161990",
+      "peran_utama": "Training Pipeline & Report Writer",
+      "focus_area": [
+          "Kode/modul: src/train.py",
+          "Arsitektur: menyusun alur eksekusi training berulang",
+          "Analisis: pencatatan win-rate dan visualisasi Q-table",
+          "Laporan: pendahuluan, analisis Q-table, kesimpulan, klaim bonus, future work"
+      ],
+      "konsep_dikuasai_implementasi": [
+          "Implementasi src/train.py: inisialisasi experiment, loop battle, logging win-rate, menyimpan Q-table",
+          "Integrasi agen dengan simulator (poke-env) dan konfigurasi training/evaluation",
+          "Mekanisme penyimpanan hasil training (file model / Q-table)",
+          "Script evaluasi dan visualisasi hasil training (visualize_training.py)"
+      ],
+      "konsep_dikuasai_teori": [
+          "Tabular Q-learning: update rule dan konvergensi pada state diskret",
+          "Perbedaan mode training vs evaluation dan greedy policy extraction",
+          "Interpretasi metrik: training vs evaluation win-rate dan jumlah state"
+      ],
+      "bagian_laporan": [
+          "Bab 1: Pendahuluan & definisi masalah",
+          "Bab IV: Pembagian tugas & deklarasi kontribusi individual",
+          "Bab V: Kesimpulan & pekerjaan lanjutan"
+      ],
+      "bagian_kode": [
+          "src/train.py"
+      ]
+      },
+      {
+      "nama": "Bonifasius Raditya Pandu Hendrianto",
+      "npm": "2306242350",
+      "peran_utama": "RL Agent, Evaluator & Visualization Engineer",
+      "focus_area": [
+          "Kode/modul: src/q_learning_agent.py, src/evaluate.py, src/visualize_training.py",
+          "Arsitektur: implementasi reward shaping modular",
+          "Analisis: visualisasi Q-table dan interpretasi performa"
+      ],
+      "konsep_dikuasai_implementasi": [
+          "Implementasi q_learning_agent.py: Q-table dictionary, update rule, action selection (softmax/greedy)",
+          "Implementasi fungsi reward modular: damage, taken, KO, faint, status, time penalty, potential-based reward",
+          "Script evaluasi dan visualisasi hasil training (evaluate.py, visualize_training.py)"
+      ],
+      "konsep_dikuasai_teori": [
+          "Bellman update dan stabilitas pembelajaran pada tabular Q-learning",
+          "Konsep reward shaping dan potential-based shaping",
+          "Metode evaluasi: training vs evaluation win-rate dan risiko single-run"
+      ],
+      "bagian_laporan": [
+          "Bab 3: Implementasi & hasil eksperimen",
+          "Subbab terkait reward shaping, evaluasi, dan visualisasi"
+      ],
+      "bagian_kode": [
+          "src/q_learning_agent.py",
+          "src/evaluate.py",
+          "src/visualize_training.py"
+      ]
+      },
+      {
+      "nama": "Christian Hadiwijaya",
+      "npm": "2306161952",
+      "peran_utama": "Q-learning Support & Experiment Design Contributor",
+      "focus_area": [
+          "Kode/modul: src/q_learning_agent.py, src/train.py, src/teams.py",
+          "Arsitektur: end-to-end training flow dan formatting team pool",
+          "Analisis: saran pengembangan reward variable dan perluasan action"
+      ],
+      "konsep_dikuasai_implementasi": [
+          "Struktur flow training Q-learning (state encoding sampai update Q)",
+          "Pembuatan dan formatting teams.py (custom opponent pool)",
+          "Integrasi fixed team agent dan random opponent sampling"
+      ],
+      "konsep_dikuasai_teori": [
+          "Representasi state diskret (HP bucket, tipe) dan implikasinya terhadap ukuran Q-table",
+          "Trade-off desain: membatasi action (move only) vs menambahkan switch",
+          "Peran reward variable untuk menangani status condition"
+      ],
+      "bagian_laporan": [
+          "Bab 3.1: Dataset & pra-pemrosesan",
+          "Bab 3.2: Konfigurasi eksperimen",
+          "Bab 3.3: Metrik evaluasi",
+          "Bab 3.4: Hasil kuantitatif"
+      ],
+      "bagian_kode": [
+          "src/q_learning_agent.py",
+          "src/train.py",
+          "src/teams.py"
+      ]
+      },
+      {
+      "nama": "Jonathan Frederick Kosasih",
+      "npm": "2306225981",
+      "peran_utama": "Opponent Pool, Human Interface & Hyperparameter Tuning",
+      "focus_area": [
+          "Kode/modul: src/teams.py, src/play_human.py, src/tune_hyperparams.py, src/plot_tuning.py",
+          "Arsitektur: pembangunan pool lawan dan human-vs-AI mode",
+          "Analisis: hyperparameter tuning dan variasi matchup"
+      ],
+      "konsep_dikuasai_implementasi": [
+          "Pembuatan custom opponent pool dan sampling tim lawan (teams.py)",
+          "Implementasi mode human-vs-AI (play_human.py)",
+          "Script tuning dan plotting untuk hyperparameter (tune_hyperparams.py, plot_tuning.py)"
+      ],
+      "konsep_dikuasai_teori": [
+          "Pengaruh komposisi tim terhadap win-rate dan generalisasi policy",
+          "Sensitivitas hyperparameter (alpha, gamma, lambda)",
+          "Metode evaluasi demonstratif (human-vs-AI) vs pengukuran kuantitatif"
+      ],
+      "bagian_laporan": [
+          "Bab 1: konteks & topik",
+          "Bab 3.5: Hyperparameter tuning",
+          "Bab 3.6: Hasil kualitatif & error analysis",
+          "Bab 3.7: Pembahasan"
+      ],
+      "bagian_kode": [
+          "src/teams.py",
+          "src/play_human.py",
+          "src/tune_hyperparams.py",
+          "src/plot_tuning.py"
+      ]
+      }
+  ],
+  "tautan": {
+      "github": "https://github.com/Tianrider/Qlearning-pokemon-battle/tree/main",
+      "colab": "",
+      "dataset_mandiri": "https://github.com/Tianrider/Qlearning-pokemon-battle/blob/main/src/teams.py",
+      "video_demo": "https://youtu.be/FM1apJvwk14"
+  },
+  "ai_assistant_usage": {
+      "digunakan": true,
+      "tools": [
+      "ChatGPT 5.5",
+      "GPT 5.4",
+      "Claude Opus 4.6",
+      "Claude Sonnet 4.6",
+      "Gemini Pro 3"
+      ],
+      "bagian": [
+      "Membantu debugging training pipeline dan src/train.py",
+      "Membantu pengembangan src/evaluate.py, reward function pada q_learning_agent.py, dan visualize_training.py",
+      "Membantu pembuatan custom opponent pool dan referensi moveset Pokemon Gen 1",
+      "Membantu pembuatan src/play_human.py, src/tune_hyperparams.py, dan src/plot_tuning.py",
+      "Membantu perapian narasi laporan, studi literatur, interpretasi hasil, kesimpulan, klaim bonus, dan future work"
+      ],
+      "estimasi_persentase": 38
+  }
+}
