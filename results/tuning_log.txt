@@ -1,0 +1,957 @@
+=================================================================
+# Hyperparameter Tuning Run  --  2026-05-25 01:42:32.935485
+# Sweep: alpha / gamma / softmax_lambda
+# Reward shaping: locked to defaults
+# Configs total: 10  |  To run: 10  |  Skipped (done): 0
+# Training battles per config : 8000
+# Eval battles per config     : 500
+=================================================================
+
+>>> Config 1/10: baseline
+
+=================================================================
+[baseline]  alpha=0.1  gamma=0.95  lambda=1.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=85.0%  states=1752  t=22s
+    [  200/8000]  win=88.0%  states=2853  t=35s
+    [  300/8000]  win=86.0%  states=3630  t=44s
+    [  400/8000]  win=86.0%  states=4269  t=55s
+    [  500/8000]  win=85.0%  states=4740  t=66s
+    [  600/8000]  win=85.7%  states=5119  t=76s
+    [  700/8000]  win=86.3%  states=5446  t=84s
+    [  800/8000]  win=86.3%  states=5722  t=96s
+    [  900/8000]  win=86.1%  states=5976  t=116s
+    [ 1000/8000]  win=86.2%  states=6210  t=135s
+    [ 1100/8000]  win=85.3%  states=6458  t=144s
+    [ 1200/8000]  win=85.6%  states=6638  t=154s
+    [ 1300/8000]  win=85.7%  states=6833  t=164s
+    [ 1400/8000]  win=85.1%  states=7028  t=173s
+    [ 1500/8000]  win=85.1%  states=7168  t=183s
+    [ 1600/8000]  win=85.2%  states=7288  t=193s
+    [ 1700/8000]  win=85.5%  states=7391  t=208s
+    [ 1800/8000]  win=85.6%  states=7494  t=221s
+    [ 1900/8000]  win=85.9%  states=7575  t=232s
+    [ 2000/8000]  win=85.6%  states=7669  t=241s
+    [ 2100/8000]  win=85.5%  states=7766  t=254s
+    [ 2200/8000]  win=85.7%  states=7853  t=266s
+    [ 2300/8000]  win=85.8%  states=7946  t=284s
+    [ 2400/8000]  win=86.1%  states=8056  t=300s
+    [ 2500/8000]  win=85.9%  states=8129  t=316s
+    [ 2600/8000]  win=85.9%  states=8188  t=331s
+    [ 2700/8000]  win=85.9%  states=8264  t=348s
+    [ 2800/8000]  win=86.2%  states=8312  t=364s
+    [ 2900/8000]  win=86.3%  states=8366  t=380s
+    [ 3000/8000]  win=86.3%  states=8436  t=396s
+    [ 3100/8000]  win=86.3%  states=8489  t=412s
+    [ 3200/8000]  win=86.3%  states=8550  t=422s
+    [ 3300/8000]  win=86.4%  states=8595  t=434s
+    [ 3400/8000]  win=86.4%  states=8651  t=445s
+    [ 3500/8000]  win=86.4%  states=8710  t=456s
+    [ 3600/8000]  win=86.5%  states=8755  t=467s
+    [ 3700/8000]  win=86.5%  states=8800  t=481s
+    [ 3800/8000]  win=86.6%  states=8830  t=497s
+    [ 3900/8000]  win=86.7%  states=8880  t=509s
+    [ 4000/8000]  win=86.6%  states=8917  t=519s
+    [ 4100/8000]  win=86.5%  states=8952  t=532s
+    [ 4200/8000]  win=86.5%  states=8989  t=543s
+    [ 4300/8000]  win=86.7%  states=9023  t=553s
+    [ 4400/8000]  win=86.6%  states=9042  t=566s
+    [ 4500/8000]  win=86.6%  states=9066  t=581s
+    [ 4600/8000]  win=86.7%  states=9085  t=592s
+    [ 4700/8000]  win=86.7%  states=9122  t=601s
+    [ 4800/8000]  win=86.6%  states=9144  t=614s
+    [ 4900/8000]  win=86.6%  states=9182  t=625s
+    [ 5000/8000]  win=86.6%  states=9203  t=636s
+    [ 5100/8000]  win=86.6%  states=9229  t=647s
+    [ 5200/8000]  win=86.5%  states=9258  t=661s
+    [ 5300/8000]  win=86.5%  states=9286  t=674s
+    [ 5400/8000]  win=86.5%  states=9314  t=687s
+    [ 5500/8000]  win=86.6%  states=9332  t=698s
+    [ 5600/8000]  win=86.5%  states=9356  t=711s
+    [ 5700/8000]  win=86.6%  states=9364  t=722s
+    [ 5800/8000]  win=86.7%  states=9391  t=733s
+    [ 5900/8000]  win=86.6%  states=9419  t=745s
+    [ 6000/8000]  win=86.7%  states=9435  t=757s
+    [ 6100/8000]  win=86.7%  states=9468  t=769s
+    [ 6200/8000]  win=86.8%  states=9487  t=781s
+    [ 6300/8000]  win=86.7%  states=9507  t=794s
+    [ 6400/8000]  win=86.8%  states=9536  t=806s
+    [ 6500/8000]  win=86.7%  states=9558  t=819s
+    [ 6600/8000]  win=86.7%  states=9571  t=832s
+    [ 6700/8000]  win=86.8%  states=9592  t=843s
+    [ 6800/8000]  win=86.7%  states=9607  t=852s
+    [ 6900/8000]  win=86.7%  states=9626  t=866s
+    [ 7000/8000]  win=86.7%  states=9643  t=880s
+    [ 7100/8000]  win=86.7%  states=9664  t=893s
+    [ 7200/8000]  win=86.7%  states=9679  t=904s
+    [ 7300/8000]  win=86.8%  states=9692  t=914s
+    [ 7400/8000]  win=86.8%  states=9715  t=931s
+    [ 7500/8000]  win=86.8%  states=9727  t=943s
+    [ 7600/8000]  win=86.8%  states=9735  t=953s
+    [ 7700/8000]  win=86.8%  states=9738  t=967s
+    [ 7800/8000]  win=86.8%  states=9751  t=980s
+    [ 7900/8000]  win=86.8%  states=9764  t=993s
+    [ 8000/8000]  win=86.8%  states=9772  t=1005s
+  [TRAIN DONE]  win=86.8%  states=9772  time=1005.5s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=94.8%  (474/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 2/10: lam_0.5
+
+=================================================================
+[lam_0.5]  alpha=0.1  gamma=0.95  lambda=0.5
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=75.0%  states=1781  t=14s
+    [  200/8000]  win=80.5%  states=2919  t=30s
+    [  300/8000]  win=79.7%  states=3681  t=44s
+    [  400/8000]  win=78.2%  states=4312  t=56s
+    [  500/8000]  win=78.6%  states=4799  t=72s
+    [  600/8000]  win=79.5%  states=5255  t=82s
+    [  700/8000]  win=80.0%  states=5592  t=97s
+    [  800/8000]  win=80.8%  states=5904  t=107s
+    [  900/8000]  win=81.0%  states=6155  t=117s
+    [ 1000/8000]  win=81.2%  states=6405  t=129s
+    [ 1100/8000]  win=81.3%  states=6627  t=139s
+    [ 1200/8000]  win=81.3%  states=6831  t=149s
+    [ 1300/8000]  win=81.4%  states=7005  t=158s
+    [ 1400/8000]  win=81.1%  states=7158  t=167s
+    [ 1500/8000]  win=81.1%  states=7308  t=177s
+    [ 1600/8000]  win=81.3%  states=7430  t=187s
+    [ 1700/8000]  win=81.0%  states=7572  t=196s
+    [ 1800/8000]  win=81.2%  states=7711  t=206s
+    [ 1900/8000]  win=81.0%  states=7854  t=217s
+    [ 2000/8000]  win=81.0%  states=7933  t=227s
+    [ 2100/8000]  win=80.9%  states=8026  t=237s
+    [ 2200/8000]  win=80.8%  states=8107  t=247s
+    [ 2300/8000]  win=81.0%  states=8192  t=257s
+    [ 2400/8000]  win=81.1%  states=8286  t=267s
+    [ 2500/8000]  win=81.3%  states=8365  t=277s
+    [ 2600/8000]  win=81.5%  states=8430  t=286s
+    [ 2700/8000]  win=81.5%  states=8526  t=296s
+    [ 2800/8000]  win=81.7%  states=8583  t=310s
+    [ 2900/8000]  win=81.7%  states=8643  t=321s
+    [ 3000/8000]  win=81.8%  states=8706  t=330s
+    [ 3100/8000]  win=81.7%  states=8757  t=340s
+    [ 3200/8000]  win=81.7%  states=8803  t=350s
+    [ 3300/8000]  win=81.5%  states=8862  t=359s
+    [ 3400/8000]  win=81.7%  states=8912  t=369s
+    [ 3500/8000]  win=81.6%  states=8951  t=380s
+    [ 3600/8000]  win=81.7%  states=8985  t=389s
+    [ 3700/8000]  win=81.6%  states=9028  t=399s
+    [ 3800/8000]  win=81.5%  states=9078  t=410s
+    [ 3900/8000]  win=81.6%  states=9111  t=421s
+    [ 4000/8000]  win=81.6%  states=9151  t=430s
+    [ 4100/8000]  win=81.8%  states=9188  t=440s
+    [ 4200/8000]  win=81.8%  states=9221  t=449s
+    [ 4300/8000]  win=82.0%  states=9243  t=458s
+    [ 4400/8000]  win=81.9%  states=9285  t=467s
+    [ 4500/8000]  win=81.9%  states=9321  t=480s
+    [ 4600/8000]  win=82.0%  states=9350  t=489s
+    [ 4700/8000]  win=82.1%  states=9378  t=499s
+    [ 4800/8000]  win=82.1%  states=9406  t=509s
+    [ 4900/8000]  win=82.2%  states=9434  t=519s
+    [ 5000/8000]  win=82.4%  states=9468  t=529s
+    [ 5100/8000]  win=82.4%  states=9490  t=538s
+    [ 5200/8000]  win=82.4%  states=9505  t=548s
+    [ 5300/8000]  win=82.4%  states=9530  t=558s
+    [ 5400/8000]  win=82.3%  states=9555  t=574s
+    [ 5500/8000]  win=82.4%  states=9572  t=584s
+    [ 5600/8000]  win=82.4%  states=9593  t=594s
+    [ 5700/8000]  win=82.4%  states=9611  t=603s
+    [ 5800/8000]  win=82.3%  states=9633  t=613s
+    [ 5900/8000]  win=82.3%  states=9651  t=623s
+    [ 6000/8000]  win=82.4%  states=9669  t=632s
+    [ 6100/8000]  win=82.4%  states=9685  t=642s
+    [ 6200/8000]  win=82.3%  states=9711  t=652s
+    [ 6300/8000]  win=82.4%  states=9737  t=663s
+    [ 6400/8000]  win=82.4%  states=9755  t=672s
+    [ 6500/8000]  win=82.5%  states=9776  t=681s
+    [ 6600/8000]  win=82.6%  states=9794  t=692s
+    [ 6700/8000]  win=82.6%  states=9823  t=702s
+    [ 6800/8000]  win=82.5%  states=9837  t=712s
+    [ 6900/8000]  win=82.5%  states=9842  t=723s
+    [ 7000/8000]  win=82.6%  states=9855  t=732s
+    [ 7100/8000]  win=82.6%  states=9866  t=740s
+    [ 7200/8000]  win=82.6%  states=9877  t=750s
+    [ 7300/8000]  win=82.7%  states=9892  t=759s
+    [ 7400/8000]  win=82.7%  states=9902  t=768s
+    [ 7500/8000]  win=82.7%  states=9910  t=780s
+    [ 7600/8000]  win=82.8%  states=9926  t=790s
+    [ 7700/8000]  win=82.9%  states=9939  t=799s
+    [ 7800/8000]  win=82.8%  states=9949  t=811s
+    [ 7900/8000]  win=82.8%  states=9973  t=820s
+    [ 8000/8000]  win=82.9%  states=9977  t=829s
+  [TRAIN DONE]  win=82.9%  states=9977  time=828.7s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=96.0%  (480/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 3/10: lam_2.0
+
+=================================================================
+[lam_2.0]  alpha=0.1  gamma=0.95  lambda=2.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=87.9%  states=1732  t=12s
+    [  200/8000]  win=82.4%  states=2806  t=22s
+    [  300/8000]  win=85.3%  states=3468  t=41s
+    [  400/8000]  win=85.5%  states=3997  t=49s
+    [  500/8000]  win=85.6%  states=4434  t=58s
+    [  600/8000]  win=86.5%  states=4777  t=66s
+    [  700/8000]  win=86.8%  states=5116  t=75s
+    [  800/8000]  win=87.2%  states=5405  t=84s
+    [  900/8000]  win=87.3%  states=5692  t=93s
+    [ 1000/8000]  win=87.7%  states=5947  t=101s
+    [ 1100/8000]  win=87.8%  states=6140  t=111s
+    [ 1200/8000]  win=87.1%  states=6369  t=119s
+    [ 1300/8000]  win=87.4%  states=6532  t=128s
+    [ 1400/8000]  win=87.7%  states=6681  t=136s
+    [ 1500/8000]  win=87.9%  states=6812  t=145s
+    [ 1600/8000]  win=87.7%  states=6959  t=155s
+    [ 1700/8000]  win=88.1%  states=7056  t=163s
+    [ 1800/8000]  win=88.2%  states=7155  t=172s
+    [ 1900/8000]  win=88.5%  states=7263  t=181s
+    [ 2000/8000]  win=88.5%  states=7350  t=188s
+    [ 2100/8000]  win=88.7%  states=7425  t=196s
+    [ 2200/8000]  win=88.8%  states=7531  t=207s
+    [ 2300/8000]  win=89.0%  states=7609  t=216s
+    [ 2400/8000]  win=88.9%  states=7674  t=224s
+    [ 2500/8000]  win=88.9%  states=7755  t=233s
+    [ 2600/8000]  win=88.9%  states=7806  t=242s
+    [ 2700/8000]  win=89.0%  states=7873  t=250s
+    [ 2800/8000]  win=89.0%  states=7952  t=258s
+    [ 2900/8000]  win=89.1%  states=8011  t=267s
+    [ 3000/8000]  win=89.1%  states=8063  t=276s
+    [ 3100/8000]  win=89.2%  states=8116  t=285s
+    [ 3200/8000]  win=89.2%  states=8161  t=293s
+    [ 3300/8000]  win=89.3%  states=8211  t=302s
+    [ 3400/8000]  win=89.3%  states=8255  t=310s
+    [ 3500/8000]  win=89.4%  states=8290  t=318s
+    [ 3600/8000]  win=89.6%  states=8342  t=327s
+    [ 3700/8000]  win=89.4%  states=8409  t=336s
+    [ 3800/8000]  win=89.4%  states=8457  t=344s
+    [ 3900/8000]  win=89.5%  states=8498  t=352s
+    [ 4000/8000]  win=89.6%  states=8540  t=360s
+    [ 4100/8000]  win=89.5%  states=8587  t=370s
+    [ 4200/8000]  win=89.7%  states=8617  t=378s
+    [ 4300/8000]  win=89.6%  states=8671  t=387s
+    [ 4400/8000]  win=89.7%  states=8713  t=395s
+    [ 4500/8000]  win=89.7%  states=8750  t=404s
+    [ 4600/8000]  win=89.8%  states=8780  t=413s
+    [ 4700/8000]  win=89.8%  states=8814  t=433s
+    [ 4800/8000]  win=89.8%  states=8828  t=440s
+    [ 4900/8000]  win=89.7%  states=8865  t=450s
+    [ 5000/8000]  win=89.8%  states=8881  t=458s
+    [ 5100/8000]  win=89.7%  states=8906  t=466s
+    [ 5200/8000]  win=89.8%  states=8938  t=475s
+    [ 5300/8000]  win=89.8%  states=8959  t=483s
+    [ 5400/8000]  win=89.8%  states=8987  t=491s
+    [ 5500/8000]  win=89.8%  states=9012  t=499s
+    [ 5600/8000]  win=89.9%  states=9040  t=509s
+    [ 5700/8000]  win=89.9%  states=9077  t=518s
+    [ 5800/8000]  win=90.0%  states=9094  t=526s
+    [ 5900/8000]  win=90.0%  states=9124  t=534s
+    [ 6000/8000]  win=90.0%  states=9150  t=543s
+    [ 6100/8000]  win=90.0%  states=9165  t=551s
+    [ 6200/8000]  win=90.1%  states=9183  t=559s
+    [ 6300/8000]  win=90.1%  states=9208  t=567s
+    [ 6400/8000]  win=90.1%  states=9230  t=576s
+    [ 6500/8000]  win=90.2%  states=9243  t=585s
+    [ 6600/8000]  win=90.3%  states=9254  t=594s
+    [ 6700/8000]  win=90.3%  states=9281  t=603s
+    [ 6800/8000]  win=90.3%  states=9295  t=611s
+    [ 6900/8000]  win=90.3%  states=9320  t=619s
+    [ 7000/8000]  win=90.3%  states=9332  t=627s
+    [ 7100/8000]  win=90.2%  states=9362  t=636s
+    [ 7200/8000]  win=90.2%  states=9376  t=644s
+    [ 7300/8000]  win=90.3%  states=9387  t=652s
+    [ 7400/8000]  win=90.3%  states=9394  t=661s
+    [ 7500/8000]  win=90.4%  states=9406  t=670s
+    [ 7600/8000]  win=90.4%  states=9417  t=678s
+    [ 7700/8000]  win=90.3%  states=9422  t=687s
+    [ 7800/8000]  win=90.3%  states=9440  t=695s
+    [ 7900/8000]  win=90.4%  states=9449  t=705s
+    [ 8000/8000]  win=90.4%  states=9459  t=713s
+  [TRAIN DONE]  win=90.4%  states=9459  time=713.2s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=96.8%  (484/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 4/10: lam_5.0
+
+=================================================================
+[lam_5.0]  alpha=0.1  gamma=0.95  lambda=5.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=91.0%  states=1635  t=11s
+    [  200/8000]  win=88.0%  states=2546  t=19s
+    [  300/8000]  win=90.0%  states=3141  t=27s
+    [  400/8000]  win=90.2%  states=3697  t=35s
+    [  500/8000]  win=89.8%  states=4103  t=44s
+    [  600/8000]  win=90.0%  states=4515  t=54s
+    [  700/8000]  win=90.4%  states=4835  t=62s
+    [  800/8000]  win=90.9%  states=5092  t=70s
+    [  900/8000]  win=90.6%  states=5364  t=78s
+    [ 1000/8000]  win=90.7%  states=5595  t=86s
+    [ 1100/8000]  win=91.0%  states=5779  t=95s
+    [ 1200/8000]  win=91.2%  states=5950  t=103s
+    [ 1300/8000]  win=90.7%  states=6080  t=111s
+    [ 1400/8000]  win=90.6%  states=6250  t=119s
+    [ 1500/8000]  win=90.4%  states=6381  t=127s
+    [ 1600/8000]  win=90.6%  states=6500  t=135s
+    [ 1700/8000]  win=90.7%  states=6597  t=143s
+    [ 1800/8000]  win=90.8%  states=6714  t=151s
+    [ 1900/8000]  win=90.7%  states=6834  t=175s
+    [ 2000/8000]  win=90.8%  states=6929  t=183s
+    [ 2100/8000]  win=90.9%  states=7001  t=191s
+    [ 2200/8000]  win=91.2%  states=7063  t=199s
+    [ 2300/8000]  win=91.2%  states=7133  t=207s
+    [ 2400/8000]  win=91.3%  states=7191  t=215s
+    [ 2500/8000]  win=91.2%  states=7271  t=224s
+    [ 2600/8000]  win=91.1%  states=7350  t=232s
+    [ 2700/8000]  win=91.1%  states=7426  t=240s
+    [ 2800/8000]  win=91.1%  states=7493  t=248s
+    [ 2900/8000]  win=91.0%  states=7546  t=257s
+    [ 3000/8000]  win=91.0%  states=7599  t=265s
+    [ 3100/8000]  win=91.0%  states=7662  t=272s
+    [ 3200/8000]  win=91.1%  states=7743  t=280s
+    [ 3300/8000]  win=91.0%  states=7787  t=288s
+    [ 3400/8000]  win=91.2%  states=7833  t=296s
+    [ 3500/8000]  win=91.2%  states=7890  t=305s
+    [ 3600/8000]  win=91.3%  states=7931  t=312s
+    [ 3700/8000]  win=91.3%  states=7957  t=320s
+    [ 3800/8000]  win=91.3%  states=7994  t=328s
+    [ 3900/8000]  win=91.3%  states=8027  t=335s
+    [ 4000/8000]  win=91.5%  states=8062  t=342s
+    [ 4100/8000]  win=91.6%  states=8098  t=351s
+    [ 4200/8000]  win=91.7%  states=8124  t=360s
+    [ 4300/8000]  win=91.7%  states=8149  t=367s
+    [ 4400/8000]  win=91.7%  states=8187  t=375s
+    [ 4500/8000]  win=91.8%  states=8219  t=383s
+    [ 4600/8000]  win=91.8%  states=8256  t=392s
+    [ 4700/8000]  win=91.9%  states=8281  t=400s
+    [ 4800/8000]  win=91.9%  states=8307  t=407s
+    [ 4900/8000]  win=92.0%  states=8332  t=415s
+    [ 5000/8000]  win=92.0%  states=8352  t=423s
+    [ 5100/8000]  win=92.0%  states=8381  t=431s
+    [ 5200/8000]  win=92.1%  states=8401  t=439s
+    [ 5300/8000]  win=92.1%  states=8419  t=446s
+    [ 5400/8000]  win=92.2%  states=8437  t=454s
+    [ 5500/8000]  win=92.3%  states=8452  t=461s
+    [ 5600/8000]  win=92.3%  states=8482  t=469s
+    [ 5700/8000]  win=92.3%  states=8510  t=477s
+    [ 5800/8000]  win=92.3%  states=8537  t=485s
+    [ 5900/8000]  win=92.4%  states=8553  t=493s
+    [ 6000/8000]  win=92.4%  states=8577  t=500s
+    [ 6100/8000]  win=92.4%  states=8592  t=508s
+    [ 6200/8000]  win=92.5%  states=8619  t=516s
+    [ 6300/8000]  win=92.5%  states=8636  t=524s
+    [ 6400/8000]  win=92.5%  states=8658  t=532s
+    [ 6500/8000]  win=92.6%  states=8688  t=539s
+    [ 6600/8000]  win=92.6%  states=8708  t=547s
+    [ 6700/8000]  win=92.6%  states=8725  t=556s
+    [ 6800/8000]  win=92.6%  states=8749  t=564s
+    [ 6900/8000]  win=92.6%  states=8773  t=572s
+    [ 7000/8000]  win=92.6%  states=8783  t=579s
+    [ 7100/8000]  win=92.7%  states=8810  t=588s
+    [ 7200/8000]  win=92.7%  states=8825  t=596s
+    [ 7300/8000]  win=92.7%  states=8840  t=604s
+    [ 7400/8000]  win=92.7%  states=8852  t=612s
+    [ 7500/8000]  win=92.8%  states=8862  t=619s
+    [ 7600/8000]  win=92.8%  states=8868  t=627s
+    [ 7700/8000]  win=92.8%  states=8889  t=635s
+    [ 7800/8000]  win=92.8%  states=8899  t=643s
+    [ 7900/8000]  win=92.9%  states=8914  t=651s
+    [ 8000/8000]  win=92.9%  states=8933  t=660s
+  [TRAIN DONE]  win=92.9%  states=8933  time=659.6s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=96.2%  (481/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 5/10: alpha_0.05
+
+=================================================================
+[alpha_0.05]  alpha=0.05  gamma=0.95  lambda=1.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=76.0%  states=1806  t=11s
+    [  200/8000]  win=78.0%  states=2775  t=21s
+    [  300/8000]  win=79.0%  states=3541  t=30s
+    [  400/8000]  win=81.2%  states=4137  t=39s
+    [  500/8000]  win=81.3%  states=4617  t=49s
+    [  600/8000]  win=82.1%  states=5084  t=60s
+    [  700/8000]  win=82.8%  states=5443  t=91s
+    [  800/8000]  win=83.2%  states=5731  t=100s
+    [  900/8000]  win=83.6%  states=6004  t=110s
+    [ 1000/8000]  win=84.1%  states=6203  t=119s
+    [ 1100/8000]  win=84.6%  states=6409  t=128s
+    [ 1200/8000]  win=85.0%  states=6628  t=137s
+    [ 1300/8000]  win=85.0%  states=6809  t=147s
+    [ 1400/8000]  win=84.9%  states=6960  t=156s
+    [ 1500/8000]  win=84.8%  states=7115  t=165s
+    [ 1600/8000]  win=84.8%  states=7250  t=175s
+    [ 1700/8000]  win=84.9%  states=7410  t=184s
+    [ 1800/8000]  win=85.0%  states=7513  t=193s
+    [ 1900/8000]  win=85.1%  states=7614  t=203s
+    [ 2000/8000]  win=85.3%  states=7728  t=211s
+    [ 2100/8000]  win=85.3%  states=7819  t=220s
+    [ 2200/8000]  win=85.0%  states=7902  t=229s
+    [ 2300/8000]  win=85.3%  states=7986  t=238s
+    [ 2400/8000]  win=85.2%  states=8089  t=248s
+    [ 2500/8000]  win=85.2%  states=8153  t=258s
+    [ 2600/8000]  win=85.3%  states=8211  t=267s
+    [ 2700/8000]  win=85.3%  states=8272  t=276s
+    [ 2800/8000]  win=85.2%  states=8366  t=286s
+    [ 2900/8000]  win=85.0%  states=8438  t=295s
+    [ 3000/8000]  win=85.3%  states=8496  t=304s
+    [ 3100/8000]  win=85.3%  states=8561  t=312s
+    [ 3200/8000]  win=85.3%  states=8608  t=322s
+    [ 3300/8000]  win=85.4%  states=8649  t=331s
+    [ 3400/8000]  win=85.5%  states=8695  t=339s
+    [ 3500/8000]  win=85.5%  states=8733  t=348s
+    [ 3600/8000]  win=85.5%  states=8778  t=358s
+    [ 3700/8000]  win=85.6%  states=8822  t=367s
+    [ 3800/8000]  win=85.9%  states=8881  t=376s
+    [ 3900/8000]  win=86.0%  states=8922  t=385s
+    [ 4000/8000]  win=86.2%  states=8966  t=394s
+    [ 4100/8000]  win=86.3%  states=9002  t=403s
+    [ 4200/8000]  win=86.3%  states=9047  t=412s
+    [ 4300/8000]  win=86.4%  states=9078  t=421s
+    [ 4400/8000]  win=86.2%  states=9103  t=430s
+    [ 4500/8000]  win=86.2%  states=9124  t=443s
+    [ 4600/8000]  win=86.4%  states=9153  t=453s
+    [ 4700/8000]  win=86.5%  states=9188  t=462s
+    [ 4800/8000]  win=86.6%  states=9209  t=471s
+    [ 4900/8000]  win=86.7%  states=9230  t=481s
+    [ 5000/8000]  win=86.9%  states=9250  t=491s
+    [ 5100/8000]  win=86.9%  states=9265  t=502s
+    [ 5200/8000]  win=87.0%  states=9290  t=511s
+    [ 5300/8000]  win=86.9%  states=9303  t=520s
+    [ 5400/8000]  win=87.0%  states=9327  t=529s
+    [ 5500/8000]  win=87.1%  states=9352  t=538s
+    [ 5600/8000]  win=87.0%  states=9374  t=547s
+    [ 5700/8000]  win=87.1%  states=9389  t=557s
+    [ 5800/8000]  win=87.1%  states=9407  t=566s
+    [ 5900/8000]  win=87.1%  states=9426  t=574s
+    [ 6000/8000]  win=87.2%  states=9446  t=583s
+    [ 6100/8000]  win=87.2%  states=9451  t=592s
+    [ 6200/8000]  win=87.2%  states=9482  t=601s
+    [ 6300/8000]  win=87.2%  states=9498  t=610s
+    [ 6400/8000]  win=87.2%  states=9520  t=619s
+    [ 6500/8000]  win=87.2%  states=9528  t=628s
+    [ 6600/8000]  win=87.3%  states=9535  t=637s
+    [ 6700/8000]  win=87.3%  states=9559  t=646s
+    [ 6800/8000]  win=87.3%  states=9580  t=655s
+    [ 6900/8000]  win=87.3%  states=9596  t=664s
+    [ 7000/8000]  win=87.4%  states=9611  t=674s
+    [ 7100/8000]  win=87.4%  states=9631  t=683s
+    [ 7200/8000]  win=87.5%  states=9644  t=693s
+    [ 7300/8000]  win=87.5%  states=9658  t=702s
+    [ 7400/8000]  win=87.6%  states=9677  t=711s
+    [ 7500/8000]  win=87.5%  states=9694  t=720s
+    [ 7600/8000]  win=87.5%  states=9702  t=730s
+    [ 7700/8000]  win=87.4%  states=9711  t=739s
+    [ 7800/8000]  win=87.4%  states=9718  t=748s
+    [ 7900/8000]  win=87.4%  states=9730  t=758s
+    [ 8000/8000]  win=87.5%  states=9738  t=767s
+  [TRAIN DONE]  win=87.5%  states=9738  time=766.8s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=96.0%  (480/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 6/10: alpha_0.20
+
+=================================================================
+[alpha_0.20]  alpha=0.2  gamma=0.95  lambda=1.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=87.0%  states=1765  t=12s
+    [  200/8000]  win=84.5%  states=2821  t=22s
+    [  300/8000]  win=83.0%  states=3661  t=32s
+    [  400/8000]  win=81.0%  states=4251  t=68s
+    [  500/8000]  win=81.8%  states=4738  t=79s
+    [  600/8000]  win=82.5%  states=5127  t=92s
+    [  700/8000]  win=83.0%  states=5486  t=102s
+    [  800/8000]  win=83.2%  states=5808  t=112s
+    [  900/8000]  win=83.7%  states=6020  t=122s
+    [ 1000/8000]  win=84.4%  states=6255  t=131s
+    [ 1100/8000]  win=85.0%  states=6447  t=140s
+    [ 1200/8000]  win=85.1%  states=6662  t=150s
+    [ 1300/8000]  win=85.1%  states=6871  t=159s
+    [ 1400/8000]  win=85.2%  states=7030  t=168s
+    [ 1500/8000]  win=85.1%  states=7170  t=177s
+    [ 1600/8000]  win=85.2%  states=7310  t=188s
+    [ 1700/8000]  win=85.3%  states=7413  t=197s
+    [ 1800/8000]  win=85.3%  states=7537  t=206s
+    [ 1900/8000]  win=85.5%  states=7646  t=216s
+    [ 2000/8000]  win=85.7%  states=7764  t=226s
+    [ 2100/8000]  win=85.5%  states=7855  t=235s
+    [ 2200/8000]  win=85.9%  states=7926  t=244s
+    [ 2300/8000]  win=86.0%  states=8009  t=254s
+    [ 2400/8000]  win=86.1%  states=8087  t=263s
+    [ 2500/8000]  win=86.1%  states=8168  t=272s
+    [ 2600/8000]  win=85.9%  states=8244  t=283s
+    [ 2700/8000]  win=86.0%  states=8297  t=294s
+    [ 2800/8000]  win=86.0%  states=8358  t=303s
+    [ 2900/8000]  win=85.9%  states=8414  t=312s
+    [ 3000/8000]  win=86.1%  states=8454  t=322s
+    [ 3100/8000]  win=86.1%  states=8498  t=331s
+    [ 3200/8000]  win=86.2%  states=8534  t=340s
+    [ 3300/8000]  win=86.1%  states=8593  t=350s
+    [ 3400/8000]  win=86.1%  states=8653  t=360s
+    [ 3500/8000]  win=86.1%  states=8700  t=369s
+    [ 3600/8000]  win=86.0%  states=8760  t=378s
+    [ 3700/8000]  win=86.1%  states=8799  t=388s
+    [ 3800/8000]  win=86.1%  states=8841  t=398s
+    [ 3900/8000]  win=86.2%  states=8881  t=407s
+    [ 4000/8000]  win=86.1%  states=8916  t=418s
+    [ 4100/8000]  win=86.1%  states=8956  t=426s
+    [ 4200/8000]  win=86.2%  states=8987  t=436s
+    [ 4300/8000]  win=86.2%  states=9013  t=445s
+    [ 4400/8000]  win=86.1%  states=9063  t=456s
+    [ 4500/8000]  win=86.2%  states=9103  t=464s
+    [ 4600/8000]  win=86.2%  states=9114  t=474s
+    [ 4700/8000]  win=86.3%  states=9168  t=484s
+    [ 4800/8000]  win=86.3%  states=9193  t=494s
+    [ 4900/8000]  win=86.2%  states=9226  t=504s
+    [ 5000/8000]  win=86.2%  states=9261  t=513s
+    [ 5100/8000]  win=86.2%  states=9283  t=523s
+    [ 5200/8000]  win=86.1%  states=9320  t=533s
+    [ 5300/8000]  win=86.0%  states=9344  t=543s
+    [ 5400/8000]  win=86.1%  states=9368  t=553s
+    [ 5500/8000]  win=86.1%  states=9397  t=564s
+    [ 5600/8000]  win=86.1%  states=9412  t=573s
+    [ 5700/8000]  win=86.0%  states=9431  t=583s
+    [ 5800/8000]  win=86.0%  states=9456  t=593s
+    [ 5900/8000]  win=86.0%  states=9479  t=604s
+    [ 6000/8000]  win=86.1%  states=9511  t=615s
+    [ 6100/8000]  win=86.1%  states=9526  t=624s
+    [ 6200/8000]  win=86.1%  states=9551  t=633s
+    [ 6300/8000]  win=85.9%  states=9575  t=643s
+    [ 6400/8000]  win=86.0%  states=9588  t=655s
+    [ 6500/8000]  win=86.0%  states=9600  t=665s
+    [ 6600/8000]  win=86.1%  states=9613  t=675s
+    [ 6700/8000]  win=86.1%  states=9629  t=685s
+    [ 6800/8000]  win=86.2%  states=9647  t=695s
+    [ 6900/8000]  win=86.1%  states=9659  t=704s
+    [ 7000/8000]  win=86.2%  states=9670  t=714s
+    [ 7100/8000]  win=86.2%  states=9680  t=724s
+    [ 7200/8000]  win=86.2%  states=9698  t=733s
+    [ 7300/8000]  win=86.1%  states=9713  t=742s
+    [ 7400/8000]  win=86.1%  states=9723  t=752s
+    [ 7500/8000]  win=86.1%  states=9742  t=762s
+    [ 7600/8000]  win=86.1%  states=9760  t=772s
+    [ 7700/8000]  win=86.1%  states=9774  t=782s
+    [ 7800/8000]  win=86.1%  states=9788  t=792s
+    [ 7900/8000]  win=86.2%  states=9800  t=802s
+    [ 8000/8000]  win=86.1%  states=9808  t=811s
+  [TRAIN DONE]  win=86.1%  states=9808  time=810.6s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=93.2%  (466/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 7/10: alpha_0.30
+
+=================================================================
+[alpha_0.30]  alpha=0.3  gamma=0.95  lambda=1.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=76.8%  states=1738  t=11s
+    [  200/8000]  win=79.8%  states=2798  t=21s
+    [  300/8000]  win=79.8%  states=3580  t=31s
+    [  400/8000]  win=79.8%  states=4230  t=43s
+    [  500/8000]  win=80.7%  states=4676  t=54s
+    [  600/8000]  win=81.2%  states=5083  t=63s
+    [  700/8000]  win=81.3%  states=5423  t=73s
+    [  800/8000]  win=80.5%  states=5750  t=83s
+    [  900/8000]  win=81.4%  states=5995  t=93s
+    [ 1000/8000]  win=81.8%  states=6227  t=103s
+    [ 1100/8000]  win=81.9%  states=6473  t=112s
+    [ 1200/8000]  win=82.3%  states=6654  t=122s
+    [ 1300/8000]  win=82.7%  states=6810  t=133s
+    [ 1400/8000]  win=82.2%  states=6976  t=142s
+    [ 1500/8000]  win=82.0%  states=7140  t=152s
+    [ 1600/8000]  win=81.8%  states=7305  t=193s
+    [ 1700/8000]  win=81.8%  states=7447  t=204s
+    [ 1800/8000]  win=82.2%  states=7560  t=213s
+    [ 1900/8000]  win=82.3%  states=7663  t=223s
+    [ 2000/8000]  win=82.2%  states=7787  t=233s
+    [ 2100/8000]  win=82.5%  states=7882  t=243s
+    [ 2200/8000]  win=82.7%  states=7971  t=254s
+    [ 2300/8000]  win=82.6%  states=8063  t=265s
+    [ 2400/8000]  win=82.5%  states=8153  t=274s
+    [ 2500/8000]  win=82.8%  states=8226  t=283s
+    [ 2600/8000]  win=82.6%  states=8301  t=293s
+    [ 2700/8000]  win=82.7%  states=8373  t=302s
+    [ 2800/8000]  win=82.8%  states=8431  t=311s
+    [ 2900/8000]  win=82.8%  states=8491  t=321s
+    [ 3000/8000]  win=82.8%  states=8551  t=330s
+    [ 3100/8000]  win=83.1%  states=8607  t=342s
+    [ 3200/8000]  win=83.1%  states=8645  t=352s
+    [ 3300/8000]  win=83.1%  states=8698  t=361s
+    [ 3400/8000]  win=83.2%  states=8747  t=370s
+    [ 3500/8000]  win=83.3%  states=8800  t=380s
+    [ 3600/8000]  win=83.3%  states=8851  t=389s
+    [ 3700/8000]  win=83.3%  states=8896  t=401s
+    [ 3800/8000]  win=83.3%  states=8953  t=411s
+    [ 3900/8000]  win=83.3%  states=8980  t=420s
+    [ 4000/8000]  win=83.2%  states=9015  t=431s
+    [ 4100/8000]  win=83.3%  states=9041  t=441s
+    [ 4200/8000]  win=83.5%  states=9072  t=450s
+    [ 4300/8000]  win=83.6%  states=9102  t=460s
+    [ 4400/8000]  win=83.5%  states=9139  t=470s
+    [ 4500/8000]  win=83.4%  states=9168  t=480s
+    [ 4600/8000]  win=83.5%  states=9204  t=490s
+    [ 4700/8000]  win=83.5%  states=9230  t=500s
+    [ 4800/8000]  win=83.5%  states=9261  t=510s
+    [ 4900/8000]  win=83.6%  states=9286  t=518s
+    [ 5000/8000]  win=83.7%  states=9315  t=528s
+    [ 5100/8000]  win=83.7%  states=9354  t=538s
+    [ 5200/8000]  win=83.7%  states=9383  t=547s
+    [ 5300/8000]  win=83.7%  states=9412  t=557s
+    [ 5400/8000]  win=83.7%  states=9428  t=568s
+    [ 5500/8000]  win=83.8%  states=9445  t=577s
+    [ 5600/8000]  win=83.8%  states=9461  t=587s
+    [ 5700/8000]  win=83.8%  states=9491  t=597s
+    [ 5800/8000]  win=83.9%  states=9507  t=607s
+    [ 5900/8000]  win=83.9%  states=9528  t=615s
+    [ 6000/8000]  win=83.8%  states=9544  t=624s
+    [ 6100/8000]  win=83.8%  states=9571  t=635s
+    [ 6200/8000]  win=83.7%  states=9589  t=645s
+    [ 6300/8000]  win=83.7%  states=9608  t=654s
+    [ 6400/8000]  win=83.7%  states=9619  t=663s
+    [ 6500/8000]  win=83.8%  states=9636  t=673s
+    [ 6600/8000]  win=83.7%  states=9652  t=682s
+    [ 6700/8000]  win=83.7%  states=9667  t=692s
+    [ 6800/8000]  win=83.7%  states=9688  t=704s
+    [ 6900/8000]  win=83.7%  states=9705  t=713s
+    [ 7000/8000]  win=83.7%  states=9717  t=722s
+    [ 7100/8000]  win=83.8%  states=9726  t=733s
+    [ 7200/8000]  win=83.9%  states=9736  t=742s
+    [ 7300/8000]  win=83.9%  states=9747  t=752s
+    [ 7400/8000]  win=83.9%  states=9766  t=761s
+    [ 7500/8000]  win=83.9%  states=9788  t=771s
+    [ 7600/8000]  win=84.0%  states=9802  t=781s
+    [ 7700/8000]  win=84.0%  states=9810  t=790s
+    [ 7800/8000]  win=83.9%  states=9828  t=800s
+    [ 7900/8000]  win=84.0%  states=9840  t=809s
+    [ 8000/8000]  win=84.0%  states=9847  t=818s
+  [TRAIN DONE]  win=84.0%  states=9847  time=818.2s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=93.0%  (465/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 8/10: gamma_0.80
+
+=================================================================
+[gamma_0.80]  alpha=0.1  gamma=0.8  lambda=1.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=82.0%  states=1636  t=11s
+    [  200/8000]  win=81.0%  states=2710  t=21s
+    [  300/8000]  win=81.3%  states=3415  t=30s
+    [  400/8000]  win=82.0%  states=4059  t=40s
+    [  500/8000]  win=83.6%  states=4560  t=49s
+    [  600/8000]  win=83.2%  states=4993  t=58s
+    [  700/8000]  win=84.3%  states=5380  t=67s
+    [  800/8000]  win=83.8%  states=5683  t=78s
+    [  900/8000]  win=84.0%  states=6009  t=87s
+    [ 1000/8000]  win=84.0%  states=6251  t=97s
+    [ 1100/8000]  win=84.2%  states=6504  t=105s
+    [ 1200/8000]  win=84.0%  states=6723  t=114s
+    [ 1300/8000]  win=84.2%  states=6868  t=123s
+    [ 1400/8000]  win=84.0%  states=7040  t=133s
+    [ 1500/8000]  win=84.1%  states=7189  t=143s
+    [ 1600/8000]  win=84.5%  states=7319  t=152s
+    [ 1700/8000]  win=84.6%  states=7458  t=161s
+    [ 1800/8000]  win=84.4%  states=7578  t=171s
+    [ 1900/8000]  win=84.7%  states=7713  t=180s
+    [ 2000/8000]  win=84.8%  states=7829  t=189s
+    [ 2100/8000]  win=85.0%  states=7919  t=198s
+    [ 2200/8000]  win=85.0%  states=8030  t=207s
+    [ 2300/8000]  win=85.0%  states=8105  t=216s
+    [ 2400/8000]  win=85.0%  states=8190  t=225s
+    [ 2500/8000]  win=85.1%  states=8257  t=235s
+    [ 2600/8000]  win=85.3%  states=8324  t=244s
+    [ 2700/8000]  win=85.5%  states=8393  t=253s
+    [ 2800/8000]  win=85.5%  states=8432  t=262s
+    [ 2900/8000]  win=85.7%  states=8510  t=271s
+    [ 3000/8000]  win=85.6%  states=8562  t=280s
+    [ 3100/8000]  win=85.7%  states=8615  t=289s
+    [ 3200/8000]  win=85.9%  states=8657  t=298s
+    [ 3300/8000]  win=86.0%  states=8701  t=307s
+    [ 3400/8000]  win=86.1%  states=8751  t=316s
+    [ 3500/8000]  win=85.8%  states=8808  t=325s
+    [ 3600/8000]  win=85.9%  states=8849  t=335s
+    [ 3700/8000]  win=85.9%  states=8905  t=344s
+    [ 3800/8000]  win=85.8%  states=8945  t=353s
+    [ 3900/8000]  win=85.7%  states=8993  t=361s
+    [ 4000/8000]  win=85.7%  states=9020  t=371s
+    [ 4100/8000]  win=85.8%  states=9054  t=380s
+    [ 4200/8000]  win=85.8%  states=9081  t=390s
+    [ 4300/8000]  win=85.7%  states=9106  t=399s
+    [ 4400/8000]  win=85.7%  states=9141  t=408s
+    [ 4500/8000]  win=85.9%  states=9163  t=417s
+    [ 4600/8000]  win=85.9%  states=9189  t=426s
+    [ 4700/8000]  win=85.9%  states=9204  t=436s
+    [ 4800/8000]  win=86.0%  states=9242  t=445s
+    [ 4900/8000]  win=85.9%  states=9276  t=454s
+    [ 5000/8000]  win=86.0%  states=9317  t=463s
+    [ 5100/8000]  win=86.0%  states=9340  t=472s
+    [ 5200/8000]  win=86.0%  states=9364  t=482s
+    [ 5300/8000]  win=86.0%  states=9382  t=528s
+    [ 5400/8000]  win=86.0%  states=9395  t=539s
+    [ 5500/8000]  win=86.2%  states=9418  t=547s
+    [ 5600/8000]  win=86.1%  states=9436  t=556s
+    [ 5700/8000]  win=86.1%  states=9463  t=565s
+    [ 5800/8000]  win=86.2%  states=9491  t=574s
+    [ 5900/8000]  win=86.3%  states=9512  t=583s
+    [ 6000/8000]  win=86.4%  states=9536  t=591s
+    [ 6100/8000]  win=86.4%  states=9557  t=599s
+    [ 6200/8000]  win=86.4%  states=9580  t=609s
+    [ 6300/8000]  win=86.4%  states=9595  t=618s
+    [ 6400/8000]  win=86.5%  states=9614  t=626s
+    [ 6500/8000]  win=86.5%  states=9622  t=636s
+    [ 6600/8000]  win=86.5%  states=9636  t=646s
+    [ 6700/8000]  win=86.4%  states=9655  t=655s
+    [ 6800/8000]  win=86.4%  states=9675  t=664s
+    [ 6900/8000]  win=86.5%  states=9687  t=672s
+    [ 7000/8000]  win=86.5%  states=9697  t=682s
+    [ 7100/8000]  win=86.5%  states=9713  t=691s
+    [ 7200/8000]  win=86.5%  states=9726  t=700s
+    [ 7300/8000]  win=86.5%  states=9743  t=709s
+    [ 7400/8000]  win=86.5%  states=9763  t=718s
+    [ 7500/8000]  win=86.5%  states=9777  t=726s
+    [ 7600/8000]  win=86.5%  states=9785  t=738s
+    [ 7700/8000]  win=86.5%  states=9798  t=748s
+    [ 7800/8000]  win=86.6%  states=9816  t=756s
+    [ 7900/8000]  win=86.5%  states=9823  t=766s
+    [ 8000/8000]  win=86.6%  states=9833  t=775s
+  [TRAIN DONE]  win=86.6%  states=9833  time=775.2s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=94.8%  (474/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 9/10: gamma_0.90
+
+=================================================================
+[gamma_0.90]  alpha=0.1  gamma=0.9  lambda=1.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=82.0%  states=1748  t=11s
+    [  200/8000]  win=82.0%  states=2781  t=22s
+    [  300/8000]  win=84.0%  states=3555  t=31s
+    [  400/8000]  win=83.5%  states=4189  t=40s
+    [  500/8000]  win=83.0%  states=4687  t=50s
+    [  600/8000]  win=83.0%  states=5078  t=59s
+    [  700/8000]  win=84.1%  states=5398  t=68s
+    [  800/8000]  win=84.2%  states=5732  t=77s
+    [  900/8000]  win=83.9%  states=6013  t=86s
+    [ 1000/8000]  win=84.0%  states=6263  t=96s
+    [ 1100/8000]  win=84.0%  states=6471  t=105s
+    [ 1200/8000]  win=84.2%  states=6681  t=114s
+    [ 1300/8000]  win=84.1%  states=6857  t=123s
+    [ 1400/8000]  win=84.3%  states=7008  t=132s
+    [ 1500/8000]  win=84.1%  states=7154  t=141s
+    [ 1600/8000]  win=84.2%  states=7292  t=150s
+    [ 1700/8000]  win=84.5%  states=7436  t=160s
+    [ 1800/8000]  win=84.7%  states=7530  t=170s
+    [ 1900/8000]  win=84.9%  states=7646  t=179s
+    [ 2000/8000]  win=85.0%  states=7750  t=189s
+    [ 2100/8000]  win=85.2%  states=7861  t=198s
+    [ 2200/8000]  win=84.9%  states=7978  t=206s
+    [ 2300/8000]  win=85.0%  states=8073  t=215s
+    [ 2400/8000]  win=85.4%  states=8137  t=225s
+    [ 2500/8000]  win=85.3%  states=8221  t=235s
+    [ 2600/8000]  win=85.3%  states=8317  t=245s
+    [ 2700/8000]  win=85.3%  states=8372  t=254s
+    [ 2800/8000]  win=85.2%  states=8452  t=264s
+    [ 2900/8000]  win=85.4%  states=8503  t=273s
+    [ 3000/8000]  win=85.3%  states=8558  t=282s
+    [ 3100/8000]  win=85.3%  states=8619  t=291s
+    [ 3200/8000]  win=85.4%  states=8666  t=301s
+    [ 3300/8000]  win=85.4%  states=8706  t=310s
+    [ 3400/8000]  win=85.4%  states=8754  t=318s
+    [ 3500/8000]  win=85.4%  states=8788  t=328s
+    [ 3600/8000]  win=85.5%  states=8822  t=337s
+    [ 3700/8000]  win=85.6%  states=8871  t=346s
+    [ 3800/8000]  win=85.7%  states=8916  t=355s
+    [ 3900/8000]  win=85.8%  states=8964  t=365s
+    [ 4000/8000]  win=85.8%  states=8987  t=374s
+    [ 4100/8000]  win=85.8%  states=9025  t=382s
+    [ 4200/8000]  win=85.9%  states=9052  t=392s
+    [ 4300/8000]  win=85.7%  states=9103  t=402s
+    [ 4400/8000]  win=85.7%  states=9134  t=410s
+    [ 4500/8000]  win=85.7%  states=9160  t=419s
+    [ 4600/8000]  win=85.8%  states=9190  t=428s
+    [ 4700/8000]  win=85.8%  states=9219  t=437s
+    [ 4800/8000]  win=86.0%  states=9247  t=446s
+    [ 4900/8000]  win=86.0%  states=9268  t=456s
+    [ 5000/8000]  win=86.0%  states=9294  t=464s
+    [ 5100/8000]  win=85.9%  states=9323  t=474s
+    [ 5200/8000]  win=85.9%  states=9342  t=483s
+    [ 5300/8000]  win=85.9%  states=9370  t=492s
+    [ 5400/8000]  win=86.0%  states=9395  t=500s
+    [ 5500/8000]  win=85.9%  states=9411  t=509s
+    [ 5600/8000]  win=85.9%  states=9428  t=518s
+    [ 5700/8000]  win=86.0%  states=9455  t=530s
+    [ 5800/8000]  win=86.0%  states=9473  t=538s
+    [ 5900/8000]  win=86.0%  states=9496  t=547s
+    [ 6000/8000]  win=86.0%  states=9514  t=556s
+    [ 6100/8000]  win=86.0%  states=9531  t=565s
+    [ 6200/8000]  win=86.0%  states=9549  t=574s
+    [ 6300/8000]  win=86.1%  states=9569  t=583s
+    [ 6400/8000]  win=86.0%  states=9582  t=593s
+    [ 6500/8000]  win=86.0%  states=9596  t=601s
+    [ 6600/8000]  win=86.1%  states=9613  t=610s
+    [ 6700/8000]  win=86.1%  states=9628  t=618s
+    [ 6800/8000]  win=86.2%  states=9646  t=627s
+    [ 6900/8000]  win=86.1%  states=9664  t=636s
+    [ 7000/8000]  win=86.1%  states=9673  t=645s
+    [ 7100/8000]  win=86.2%  states=9683  t=654s
+    [ 7200/8000]  win=86.2%  states=9704  t=664s
+    [ 7300/8000]  win=86.3%  states=9714  t=673s
+    [ 7400/8000]  win=86.3%  states=9730  t=682s
+    [ 7500/8000]  win=86.3%  states=9748  t=692s
+    [ 7600/8000]  win=86.3%  states=9757  t=702s
+    [ 7700/8000]  win=86.3%  states=9770  t=711s
+    [ 7800/8000]  win=86.3%  states=9776  t=720s
+    [ 7900/8000]  win=86.4%  states=9790  t=730s
+    [ 8000/8000]  win=86.4%  states=9807  t=739s
+  [TRAIN DONE]  win=86.4%  states=9807  time=739.0s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=96.4%  (482/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+>>> Config 10/10: gamma_0.99
+
+=================================================================
+[gamma_0.99]  alpha=0.1  gamma=0.99  lambda=1.0
+  reward shaping: locked to defaults {'k_d': 40.0, 'k_t': 30.0, 'KO_bonus': 20.0, 'faint_penalty': 20.0, 'status_bonus': 5.0, 'time_penalty': 0.1, 'w_hp': 1.0, 'w_alive': 8.0, 'w_type': 2.0}
+=================================================================
+  [TRAIN] Starting 8000 battles...
+    [  100/8000]  win=78.8%  states=1749  t=12s
+    [  200/8000]  win=80.3%  states=2809  t=22s
+    [  300/8000]  win=79.2%  states=3558  t=32s
+    [  400/8000]  win=81.9%  states=4119  t=41s
+    [  500/8000]  win=82.5%  states=4571  t=53s
+    [  600/8000]  win=82.9%  states=5001  t=62s
+    [  700/8000]  win=82.9%  states=5354  t=73s
+    [  800/8000]  win=82.8%  states=5687  t=83s
+    [  900/8000]  win=82.6%  states=5956  t=93s
+    [ 1000/8000]  win=82.8%  states=6184  t=102s
+    [ 1100/8000]  win=83.2%  states=6395  t=111s
+    [ 1200/8000]  win=83.7%  states=6614  t=120s
+    [ 1300/8000]  win=83.7%  states=6825  t=130s
+    [ 1400/8000]  win=84.1%  states=6995  t=139s
+    [ 1500/8000]  win=83.8%  states=7163  t=150s
+    [ 1600/8000]  win=84.4%  states=7284  t=159s
+    [ 1700/8000]  win=84.7%  states=7402  t=167s
+    [ 1800/8000]  win=84.6%  states=7530  t=176s
+    [ 1900/8000]  win=85.0%  states=7622  t=187s
+    [ 2000/8000]  win=84.9%  states=7714  t=196s
+    [ 2100/8000]  win=84.7%  states=7815  t=205s
+    [ 2200/8000]  win=84.7%  states=7919  t=215s
+    [ 2300/8000]  win=84.8%  states=7994  t=224s
+    [ 2400/8000]  win=84.8%  states=8098  t=234s
+    [ 2500/8000]  win=84.7%  states=8153  t=244s
+    [ 2600/8000]  win=84.8%  states=8223  t=253s
+    [ 2700/8000]  win=84.8%  states=8279  t=262s
+    [ 2800/8000]  win=85.0%  states=8331  t=271s
+    [ 2900/8000]  win=85.3%  states=8388  t=282s
+    [ 3000/8000]  win=85.1%  states=8441  t=293s
+    [ 3100/8000]  win=85.0%  states=8506  t=303s
+    [ 3200/8000]  win=85.1%  states=8557  t=314s
+    [ 3300/8000]  win=85.2%  states=8599  t=323s
+    [ 3400/8000]  win=85.2%  states=8642  t=332s
+    [ 3500/8000]  win=85.2%  states=8687  t=341s
+    [ 3600/8000]  win=85.1%  states=8725  t=353s
+    [ 3700/8000]  win=85.2%  states=8774  t=409s
+    [ 3800/8000]  win=85.3%  states=8803  t=419s
+    [ 3900/8000]  win=85.4%  states=8839  t=428s
+    [ 4000/8000]  win=85.6%  states=8864  t=437s
+    [ 4100/8000]  win=85.8%  states=8896  t=448s
+    [ 4200/8000]  win=85.8%  states=8927  t=456s
+    [ 4300/8000]  win=85.8%  states=8959  t=465s
+    [ 4400/8000]  win=85.8%  states=9008  t=475s
+    [ 4500/8000]  win=85.9%  states=9047  t=484s
+    [ 4600/8000]  win=85.9%  states=9074  t=493s
+    [ 4700/8000]  win=86.0%  states=9095  t=502s
+    [ 4800/8000]  win=86.0%  states=9115  t=512s
+    [ 4900/8000]  win=86.1%  states=9130  t=521s
+    [ 5000/8000]  win=86.1%  states=9154  t=531s
+    [ 5100/8000]  win=85.9%  states=9175  t=540s
+    [ 5200/8000]  win=85.9%  states=9201  t=550s
+    [ 5300/8000]  win=85.9%  states=9223  t=559s
+    [ 5400/8000]  win=85.9%  states=9254  t=569s
+    [ 5500/8000]  win=85.9%  states=9276  t=578s
+    [ 5600/8000]  win=86.0%  states=9308  t=588s
+    [ 5700/8000]  win=86.1%  states=9331  t=598s
+    [ 5800/8000]  win=86.2%  states=9344  t=608s
+    [ 5900/8000]  win=86.2%  states=9367  t=618s
+    [ 6000/8000]  win=86.1%  states=9385  t=627s
+    [ 6100/8000]  win=86.2%  states=9402  t=636s
+    [ 6200/8000]  win=86.2%  states=9416  t=649s
+    [ 6300/8000]  win=86.1%  states=9437  t=658s
+    [ 6400/8000]  win=86.2%  states=9455  t=667s
+    [ 6500/8000]  win=86.2%  states=9475  t=678s
+    [ 6600/8000]  win=86.2%  states=9491  t=689s
+    [ 6700/8000]  win=86.2%  states=9509  t=698s
+    [ 6800/8000]  win=86.2%  states=9529  t=707s
+    [ 6900/8000]  win=86.3%  states=9540  t=717s
+    [ 7000/8000]  win=86.3%  states=9549  t=727s
+    [ 7100/8000]  win=86.3%  states=9576  t=736s
+    [ 7200/8000]  win=86.3%  states=9594  t=746s
+    [ 7300/8000]  win=86.4%  states=9612  t=756s
+    [ 7400/8000]  win=86.4%  states=9635  t=765s
+    [ 7500/8000]  win=86.3%  states=9662  t=774s
+    [ 7600/8000]  win=86.2%  states=9680  t=784s
+    [ 7700/8000]  win=86.2%  states=9702  t=794s
+    [ 7800/8000]  win=86.2%  states=9719  t=804s
+    [ 7900/8000]  win=86.2%  states=9731  t=815s
+    [ 8000/8000]  win=86.1%  states=9742  t=824s
+  [TRAIN DONE]  win=86.1%  states=9742  time=824.3s
+  [EVAL]  Running 500 greedy battles...
+  [EVAL DONE]  win=96.8%  (484/500)
+
+  Saved -> C:\Users\jonat\OneDrive\Documents\university\smt6\ai\q-learning-pokemon-battle\src\..\results\tuning_results.csv
+
+
+=================================================================
+TUNING SUMMARY (this run)
+=================================================================
+  ID              alpha  gamma  lambda    Train%    Eval%   States
+-----------------------------------------------------------------
+  lam_2.0           0.1   0.95     2.0     90.4%     96.8%     9459
+  gamma_0.99        0.1   0.99     1.0     86.1%     96.8%     9742
+  gamma_0.90        0.1    0.9     1.0     86.4%     96.4%     9807
+  lam_5.0           0.1   0.95     5.0     92.9%     96.2%     8933
+  lam_0.5           0.1   0.95     0.5     82.9%     96.0%     9977
+  alpha_0.05       0.05   0.95     1.0     87.5%     96.0%     9738
+  baseline          0.1   0.95     1.0     86.8%     94.8%     9772
+  gamma_0.80        0.1    0.8     1.0     86.6%     94.8%     9833
+  alpha_0.20        0.2   0.95     1.0     86.1%     93.2%     9808
+  alpha_0.30        0.3   0.95     1.0     84.0%     93.0%     9847
+
+  Best: [lam_2.0]  eval=96.8%  (alpha=0.1, gamma=0.95, lambda=2.0)

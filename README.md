@@ -5,7 +5,7 @@ Recreating the paper "Optimal Battle Strategy in Pokemon using Reinforcement Lea
 ## Key Design Choice
 
 - **Our team is FIXED** (Alakazam, Snorlax, Tauros, Starmie, Exeggutor, Chansey) — removes randomness from our side
-- **Opponent teams are RANDOM** — generated from a pool of 30 Gen 1 Pokemon each battle
+- **Opponent teams are RANDOM** — generated from a pool of 50 Gen 1 Pokemon each battle
 - **Format: gen1ou** — allows custom teams, uses full Gen 1 mechanics
 
 ## Setup
@@ -66,6 +66,10 @@ python src/visualize_training.py --input results/training_log.csv
 
 Plots are saved under `results/plots/plot_[input_name]/`.
 
+## Hyperparameter Tuning
+
+You can run hyperparameter sweeps using `src/tune_hyperparams.py`. This will train and evaluate multiple configurations, logging results to `results/tuning_results.csv` and `results/tuning_log.txt`. The results can be visualized using `src/plot_tuning.py` to generate a summary plot of all configurations as `results/tuning_charts.png`.
+
 ## Architecture
 
 ```
@@ -75,6 +79,8 @@ src/
 ├── train.py              # Training vs random (logs every 10 battles)
 ├── evaluate.py           # Load & evaluate trained models
 ├── visualize_training.py # Generate visualize plot for training (pkl)
+├── tune_hyperparams.py   # Run hyperparameter tuning sweeps
+├── plot_tuning.py        # Generate summary plot for tuning results
 └── play_human.py         # Play against the trained bot in browser
 results/
 ├── *.pkl                 # Saved Q-tables
@@ -89,7 +95,7 @@ results/
 Q(s, a) ← Q(s, a) + α(r + γ·max_a' Q(s', a') - Q(s, a))
 ```
 
-**Hyperparameters:** α = 0.10, γ = 0.95
+**Hyperparameters:** α = 0.10, γ = 0.95, softmax λ = 1.0
 
 **State Vector:**
 
@@ -135,6 +141,6 @@ Significantly outperforms the paper's 65% (5k games) and 70% (20k games) thanks 
 
 ## Future Improvements
 
-1. **Increase opponent Pokemon team pool** — Expand the random opponent pool beyond the current 30 Gen 1 Pokemon to include all 151. This will expose the agent to a wider variety of type matchups and force it to generalize better, making the learned policy more robust against unseen teams.
+1. **Increase opponent Pokemon team pool** — Expand the random opponent pool beyond the current 50 Gen 1 Pokemon to include all 151. This will expose the agent to a wider variety of type matchups and force it to generalize better, making the learned policy more robust against unseen teams.
 
 2. **Add switch Pokemon action with type-effectiveness reward** — Currently the agent only chooses between its 4 available moves. Adding the ability to switch Pokemon as an action (expanding action space from 4 to up to 9) would allow the agent to learn strategic switches. A bonus reward should be given when switching to a Pokemon with a type advantage against the opponent's active Pokemon, encouraging the agent to learn defensive/offensive pivoting.

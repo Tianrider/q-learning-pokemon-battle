@@ -268,6 +268,146 @@ Level: 100
 - Blizzard
 - Rest
 - Body Slam""",
+    """Cloyster
+Ability: No Ability
+Level: 100
+- Surf
+- Blizzard
+- Hyper Beam
+- Explosion""",
+    """Exeggutor
+Ability: No Ability
+Level: 100
+- Sleep Powder
+- Psychic
+- Explosion
+- Mega Drain""",
+    """Starmie
+Ability: No Ability
+Level: 100
+- Recover
+- Thunder Wave
+- Blizzard
+- Psychic""",
+    """Tauros
+Ability: No Ability
+Level: 100
+- Body Slam
+- Hyper Beam
+- Earthquake
+- Blizzard""",
+    """Arbok
+Ability: No Ability
+Level: 100
+- Earthquake
+- Rock Slide
+- Glare
+- Hyper Beam""",
+    """Gyarados
+Ability: No Ability
+Level: 100
+- Hyper Beam
+- Body Slam
+- Hydro Pump
+- Blizzard""",
+    """Kabutops
+Ability: No Ability
+Level: 100
+- Surf
+- Slash
+- Swords Dance
+- Hyper Beam""",
+    """Kingler
+Ability: No Ability
+Level: 100
+- Crabhammer
+- Hyper Beam
+- Body Slam
+- Swords Dance""",
+    """Omastar
+Ability: No Ability
+Level: 100
+- Surf
+- Ice Beam
+- Seismic Toss
+- Rest""",
+    """Porygon
+Ability: No Ability 
+Level: 100
+- Thunderbolt
+- Recover
+- Thunder Wave
+- Ice Beam""",
+    """Raticate
+Ability: No Ability
+Level: 100
+- Super Fang
+- Hyper Beam
+- Body Slam
+- Bubble Beam""",
+    """Pinsir
+Ability: No Ability
+Level: 100
+- Swords Dance
+- Hyper Beam
+- Slash
+- Submission""",
+    """Lickitung
+Ability: No Ability
+Level: 100
+- Swords Dance
+- Hyper Beam
+- Earthquake
+- Surf""",
+    """Snorlax
+Ability: No Ability
+Level: 100
+- Body Slam
+- Reflect
+- Rest
+- Hyper Beam""",
+    """Pidgeot
+Ability: No Ability
+Level: 100
+- Double-Edge
+- Hyper Beam
+- Agility
+- Sand Attack""",
+    """Tentacruel
+Ability: No Ability
+Level: 100
+- Swords Dance
+- Hyper Beam
+- Surf
+- Blizzard""",
+    """Vileplume
+Ability: No Ability 
+Level: 100
+- Sleep Powder
+- Stun Spore
+- Mega Drain
+- Body Slam""",
+    """Ninetales
+Ability: No Ability 
+Level: 100
+- Fire Blast
+- Body Slam
+- Hyper Beam
+- Flamethrower""",
+    """Scyther
+Ability: No Ability
+Level: 100
+- Slash
+- Swords Dance
+- Hyper Beam
+- Wing Attack""",
+    """Fearow
+Ability: No Ability
+Level: 100
+- Drill Peck
+- Hyper Beam
+- Agility
+- Double-Edge""",
 ]
 
 
