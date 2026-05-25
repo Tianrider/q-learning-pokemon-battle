@@ -1,0 +1,1069 @@
+%==============================================================================
+% TEMPLATE LAPORAN AKHIR PROYEK PENGGANTI UAS
+% Mata Kuliah Kecerdasan Buatan | Teknik Komputer - Universitas Indonesia
+% Semester Genap 2025/2026
+%
+% Cara pakai:
+% !TeX program = pdflatex
+%   1. Ganti seluruh teks yang ada di dalam [...] atau \TODO{...}.
+%   2. Hapus blok "petunjuk" (yang ditandai dengan environment "petunjuk")
+%      setelah subbab terkait selesai diisi.
+%   3. Kompilasi langsung di Overleaf atau dengan pdflatex/biber.
+%   4. Sitasi pakai BibTeX gaya IEEE (file referensi.bib).
+%==============================================================================
+
+\documentclass[11pt,a4paper,oneside]{report}
+
+%------ Bahasa & Font --------------------------------------------------------
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{newtxtext}
+  \usepackage{newtxmath}
+  \usepackage{courier}
+  \renewcommand{\ttdefault}{pcr}
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{TeX Gyre Termes}}
+  \IfFontExistsTF{Consolas}{\setmonofont{Consolas}[Scale=0.92]}{\setmonofont{Latin Modern Mono}[Scale=0.92]}
+\fi
+
+%------ Geometri & Spasi -----------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parskip}{0.5em}
+
+%------ Paket Pendukung ------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{caption}
+\usepackage[backend=biber,style=ieee]{biblatex}
+
+%------ Penyesuaian Bahasa Indonesia (manual, tanpa babel) -------------------
+\renewcommand{\chaptername}{BAB}
+\renewcommand{\contentsname}{DAFTAR ISI}
+\renewcommand{\listfigurename}{DAFTAR GAMBAR}
+\renewcommand{\listtablename}{DAFTAR TABEL}
+\renewcommand{\bibname}{DAFTAR PUSTAKA}
+\renewcommand{\appendixname}{LAMPIRAN}
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
+
+%------ Format Bab (BAB I, BAB II, ...) --------------------------------------
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\centering}
+  {\chaptername\ \thechapter}{12pt}{\Large}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+%------ Hyperref -------------------------------------------------------------
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black,
+  pdftitle={Laporan Akhir Proyek - MK Kecerdasan Buatan},
+  pdfauthor={Kelompok [KodeKelompok]}
+}
+
+%------ Box Petunjuk Pengisian (HAPUS setelah subbab terisi) ----------------
+\newtcolorbox{petunjuk}{
+  colback=yellow!10,
+  colframe=orange!60!black,
+  boxrule=0.5pt,
+  arc=2pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  fontupper=\small\itshape
+}
+
+%------ Listing untuk JSON ---------------------------------------------------
+\lstdefinelanguage{json}{
+  basicstyle=\ttfamily\footnotesize,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{gray!50},
+  string=[s]{"}{"},
+  stringstyle=\color{blue!60!black},
+  comment=[l]{//},
+  commentstyle=\color{green!50!black}
+}
+
+%------ Bibliography (siapkan referensi.bib di folder yang sama) -------------
+\addbibresource{referensi.bib}
+
+%==============================================================================
+\begin{document}
+
+%==============================================================================
+% HALAMAN SAMPUL
+%==============================================================================
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+{\Large\bfseries LAPORAN AKHIR \par}
+{\large PROYEK PENGGANTI UAS \par}
+\vspace{0.3cm}
+{\large Mata Kuliah Kecerdasan Buatan \par}
+{\large Semester Genap 2025/2026 \par}
+
+\vspace{2cm}
+
+% Logo opsional
+% \includegraphics[width=0.25\textwidth]{logo-ui.png}
+
+\vspace{1.5cm}
+
+{\LARGE\bfseries Implementasi \textit{Reinforcement Learning} Menggunakan \textit{Q-Learning} pada Strategi Pertarungan \textit{Pokémon Battle} \par}
+\vspace{0.5cm}
+{\large Subjudul: Reinforcement Learning \par}
+
+\vspace{2.5cm}
+
+{\large Disusun oleh: \par}
+\vspace{0.5cm}
+\begin{tabular}{rl}
+{Falah Andhesryo} & NPM. 2306161990 \\
+{Bonifasius Raditya Pandu Hendrianto} & NPM. 2306242350 \\
+{Christian Hadiwijaya} & NPM. 2306161952 \\
+ {Jonathan Frederick Kosasih} & NPM. 2306225981 \\
+\end{tabular}
+
+\vspace{2cm}
+
+{\large Dosen Pengampu: \par}
+{\large Muhammad Firdaus Syawaludin Lubis, S.T., M.T., Ph.D. \par}
+
+\vfill
+
+{\large DEPARTEMEN TEKNIK KOMPUTER \par}
+{\large FAKULTAS TEKNIK \par}
+{\large UNIVERSITAS INDONESIA \par}
+{\large MEI 2026 \par}
+\end{titlepage}
+
+%==============================================================================
+% LEMBAR PERNYATAAN ORISINALITAS
+%==============================================================================
+\chapter*{LEMBAR PERNYATAAN ORISINALITAS}
+\addcontentsline{toc}{chapter}{Lembar Pernyataan Orisinalitas}
+
+Kami yang bertandatangan di bawah ini menyatakan bahwa laporan ini, beserta seluruh isinya (termasuk Sub-bab IV.x masing-masing anggota dan berkas \texttt{metadata.json} yang merupakan bagian tidak terpisahkan), adalah hasil karya kelompok kami sendiri. Setiap kutipan, kode, atau gambar yang berasal dari sumber lain telah disitasi dengan benar. Penggunaan AI \textit{assistant} telah dideklarasikan secara jujur pada Sub-bab IV.x.2.
+
+\vspace{1.5cm}
+
+\noindent
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\centering Falah Andhesryo & \centering Bonifasius Raditya Pandu Hendrianto \tabularnewline
+\centering NPM. 2306161990 & \centering NPM. 2306242350 \tabularnewline
+\vspace{1.5cm} & \vspace{1.5cm} \tabularnewline
+\centering (\hspace{4cm}) & \centering (\hspace{4cm}) \tabularnewline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\centering Christian Hadiwijaya & \centering Jonathan Frederick Kosasih \tabularnewline
+\centering NPM. 2306161952 & \centering NPM. 2306225981 \tabularnewline
+\vspace{1.5cm} & \vspace{1.5cm} \tabularnewline
+\centering (\hspace{4cm}) & \centering (\hspace{4cm}) \tabularnewline
+\end{tabular}
+
+%==============================================================================
+% DAFTAR ISI, GAMBAR, TABEL
+%==============================================================================
+\tableofcontents
+\listoffigures
+\listoftables
+
+%==============================================================================
+% ABSTRAK
+%==============================================================================
+\chapter*{ABSTRAK}
+\addcontentsline{toc}{chapter}{Abstrak}
+
+\begin{petunjuk}
+Maksimum 250 kata. Tulis dalam satu paragraf utuh. Cakupi: konteks masalah singkat, pendekatan AI yang digunakan, dataset, metrik utama, dan hasil kuantitatif terpenting (angka konkret). Hindari kalimat klise seperti ``proyek ini bertujuan untuk mengeksplorasi\ldots''. Mulai langsung dengan substansi.
+\end{petunjuk}
+
+[ISI ABSTRAK DI SINI]
+
+\vspace{1em}
+\noindent\textbf{Kata kunci:} [3--5 kata kunci dipisahkan koma]
+
+%==============================================================================
+% BAB I - PENDAHULUAN & DEFINISI MASALAH
+%==============================================================================
+\chapter{PENDAHULUAN \& DEFINISI MASALAH}
+\label{bab:pendahuluan}
+
+\section{Topik yang Dipilih}
+
+Topik yang dipilih adalah \textit{reinforcement learning}. Topik ini dipilih karena memiliki karakteristik yang menarik dalam kajian \textit{Artificial Intelligence (AI)}, terutama pada kemampuannya memodelkan proses \textit{sequential decision-making}. Berbeda dari pendekatan yang hanya berfokus pada pengenalan pola, \textit{reinforcement learning} menekankan bagaimana sebuah \textit{agent} belajar menentukan \textit{action} terbaik melalui interaksi dengan \textit{environment} dan umpan balik berupa \textit{reward}. Dalam laporan ini, pendekatan tersebut difokuskan pada metode \textit{Q-learning}, yaitu salah satu metode dasar dalam \textit{reinforcement learning} yang memanfaatkan nilai Q untuk mengevaluasi kualitas suatu \textit{action} pada kondisi tertentu. Karakteristik ini membuat topik \textit{reinforcement learning} relevan untuk dianalisis karena mencakup konsep strategi, \textit{exploration}, dan \textit{adaptive learning} dalam sistem \textit{AI} yang beroperasi pada situasi dinamis.
+
+\section{Rumusan Masalah}
+
+\begin{enumerate}[label=RM\arabic*.,leftmargin=*]
+    \item Bagaimana konsep \textit{reinforcement learning} diterapkan dalam proses pengambilan keputusan pada sistem berbasis \textit{Q-learning}? 
+    \item Bagaimana representasi \textit{state}, \textit{action}, dan \textit{reward} digunakan dalam implementasi \textit{Q-learning} pada studi kasus \textit{Pokémon battle}? 
+    \item Bagaimana hasil dan keterbatasan implementasi \textit{Q-learning} dalam membentuk strategi \textit{agent} pada studi kasus \textit{Pokémon battle}? 
+\end{enumerate}
+
+\section{Tujuan Proyek}
+
+\begin{enumerate}[label=T\arabic*.,leftmargin=*]
+    \item Menerapkan metode \textit{Q-learning} dengan eksplorasi \textit{softmax} dalam skenario \textit{Pokémon battle} menggunakan simulator \textit{Pokémon Showdown} sebagai \textit{environment}.
+    \item Merancang representasi \textit{state}, \textit{action}, dan \textit{reward} yang sesuai untuk \textit{agent} berbasis \textit{tabular Q-learning} pada domain \textit{Pokémon battle} generasi pertama. 
+    \item Mengevaluasi performa \textit{agent} yang telah dilatih menggunakan metrik \textit{win rate} terhadap lawan acak, serta membandingkan hasilnya dengan hasil pada paper acuan. 
+    \item Menganalisis keterbatasan implementasi \textit{tabular Q-learning} pada domain \textit{Pokémon battle}, termasuk cakupan ruang \textit{state} dan pengaruh elemen stokastik simulator terhadap konvergensi kebijakan \textit{agent}. 
+\end{enumerate}
+\section{Ruang Lingkup \& Batasan}
+
+Laporan ini berfokus pada perancangan, implementasi, dan analisis program \textit{reinforcement learning} yang dikembangkan oleh tim. Program ini menggunakan metode \textit{Q-learning} untuk membentuk \textit{agent} yang mampu mengambil keputusan dalam skenario \textit{Pokémon battle}. Pembahasan mencakup konsep dasar \textit{reinforcement learning}, perancangan \textit{state}, \textit{action}, dan \textit{reward}, struktur program, proses \textit{training}, proses \textit{evaluation}, serta analisis terhadap hasil yang diperoleh dari implementasi program.
+
+Batasan sementara yang digunakan dalam laporan ini adalah sebagai berikut.
+\begin{itemize}[leftmargin=*]
+    \item Program yang dianalisis merupakan produk utama yang dikembangkan oleh tim untuk menerapkan konsep \textit{reinforcement learning} pada skenario permainan berbasis strategi.
+    \item Metode yang digunakan dibatasi pada \textit{tabular Q-learning}, sehingga laporan ini tidak membahas metode \textit{deep reinforcement learning} secara mendalam.
+    \item Fokus pengembangan berada pada kemampuan \textit{agent} dalam memilih \textit{action} berdasarkan \textit{state} dan \textit{reward} yang diperoleh selama proses interaksi dengan \textit{environment}.
+    \item Ruang lingkup aksi \textit{agent} dibatasi pada mekanisme yang telah diimplementasikan dalam program, sehingga strategi yang belum tersedia pada kode tidak menjadi fokus utama pembahasan.
+    \item Analisis hasil dilakukan berdasarkan proses \textit{training}, proses \textit{evaluation}, dan performa program yang diperoleh dari implementasi yang telah dibuat.
+    \item Laporan ini tidak membahas seluruh aspek teknis permainan secara mendalam, tetapi hanya aspek yang relevan dengan penerapan \textit{reinforcement learning}.
+\end{itemize}
+
+%==============================================================================
+% BAB II - PENDEKATAN AI
+%==============================================================================
+
+\chapter{PENDEKATAN AI}
+\label{bab:pendekatan}
+
+\section{Tinjauan Pustaka}
+(\textit{Reinforcement learning}, disingkat RL) adalah cabang \textit{machine learning} yang mempelajari bagaimana sebuah agen membuat keputusan sekuensial melalui interaksi dengan lingkungan. Secara formal banyak masalah RL dimodelkan sebagai \textit{Markov Decision Process} (MDP) yang terdiri dari himpunan \(S\) (state), himpunan \(A\) (aksi), fungsi transisi \(P(s'\mid s,a)\), fungsi reward \(R(s,a,s')\), dan faktor diskonto \(\gamma\). Tujuan agen adalah menemukan kebijakan \(\pi(a\mid s)\) yang memaksimalkan ekspektasi total reward terdiskonto
+\[
+\mathbb{E}\Bigl[\sum_{t=0}^{\infty} \gamma^{t} r_t\Bigr],
+\]
+dengan \(r_t\) adalah reward pada langkah ke-\(t\). 
+
+Dalam pendekatan \textit{model-free} seperti Q-learning, agen tidak mencoba mempelajari model transisi \(P\) atau fungsi reward \(R\) secara eksplisit, melainkan mengestimasi fungsi nilai aksi \(Q(s,a)\) langsung dari pengalaman menggunakan pembaruan temporal-difference. Q-learning bersifat \textit{off-policy} dan, di bawah kondisi eksplorasi yang memadai dan pengaturan \(\alpha\) yang sesuai, dapat konvergen ke nilai Q optimal. 
+
+Aspek penting dalam RL mencakup trade-off eksplorasi–eksploitasi (mencoba aksi baru untuk menemukan kebijakan lebih baik versus memanfaatkan aksi yang sudah diketahui baik), pemilihan hyperparameter (mis. learning rate \(\alpha\), discount factor \(\gamma\)), serta desain fungsi reward yang stabil dan informatif. Untuk tugas episodik (dengan terminal) dan tugas berkelanjutan, strategi desain reward serta teknik seperti \textit{reward shaping} atau pembatasan representasi state (diskretisasi) sering digunakan agar pembelajaran menjadi lebih efisien dan dapat dianalisis pada domain permainan turn-based seperti Pokémon.
+
+Penjelasan ini menyediakan dasar konseptual yang mendukung pemilihan \textit{tabular Q-learning} pada proyek ini: ruang state didiskretkan agar tabel Q dapat dikelola, reward shaping digunakan untuk mempercepat sinyal belajar, dan kebijakan eksplorasi (mis. \textit{softmax}) dipilih untuk menyeimbangkan eksplorasi dan eksploitasi.
+
+Tinjauan pustaka berikut dipilih karena masing-masing membahas aspek yang langsung relevan dengan rancangan proyek ini, yaitu definisi RL, sensitivitas hyperparameter, desain reward, dan penerapan RL pada Pokémon Showdown.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.6cm}
+                  >{\raggedright\arraybackslash}p{2.9cm}
+                  >{\raggedright\arraybackslash}p{2.7cm}
+                  >{\raggedright\arraybackslash}p{2.9cm}
+                  >{\raggedright\arraybackslash}p{2.9cm}}
+
+\caption{Ringkasan tinjauan pustaka}
+\label{tab:related-work} \\
+\toprule
+\textbf{Sumber} &
+\textbf{Metode / Fokus} &
+\textbf{Objek / Lingkungan} &
+\textbf{Temuan Utama} &
+\textbf{Implikasi untuk Proyek} \\
+\midrule
+\endfirsthead
+
+\multicolumn{5}{c}{\tablename\ \thetable{} -- lanjutan} \\
+\toprule
+\textbf{Sumber} &
+\textbf{Metode / Fokus} &
+\textbf{Objek / Lingkungan} &
+\textbf{Temuan Utama} &
+\textbf{Implikasi untuk Proyek} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{\small lanjut ke halaman berikutnya} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+GeeksforGeeks, \textit{Reinforcement Learning} \href{https://medium.com/@kevalvivek4/pok%C3%A9mon-showdown-with-reinforcement-learning-f5aad9a93cef}{(link)} &
+Uraian konsep dasar RL, komponen inti, dan proses belajar trial-and-error &
+Masalah keputusan sekuensial secara umum &
+RL dipandang sebagai proses iteratif state--action--reward, dengan eksplorasi dan eksploitasi sebagai inti pembelajaran. Sumber ini juga menyoroti bahwa reward function harus dirancang dengan hati-hati. &
+Menjadi dasar konseptual untuk mendefinisikan state, action, reward, dan terminal reward pada pertarungan Pokémon. \\
+\addlinespace
+
+AutoML.org, \textit{Hyperparameter Tuning in Reinforcement Learning is Easy, Actually} \href{https://www.automl.org/hyperparameter-tuning-in-reinforcement-learning-is-easy-actually/}{(link)} &
+Analisis sensitivitas hyperparameter pada PPO, DQN, dan SAC &
+Beragam lingkungan RL klasik, locomotion, dan grid world &
+Mayoritas hyperparameter berpengaruh nyata terhadap performa; interaksi antarparameter tidak terlalu sempit; variasi seed dapat mengubah hasil secara signifikan. &
+Mendukung keputusan untuk menyiapkan beberapa hyperparameter reward shaping dan eksplorasi, serta tidak menganggap satu set nilai sebagai konfigurasi yang universal. \\
+\addlinespace
+
+Vivek Keval et al., \textit{Pokémon Showdown with Reinforcement Learning} \href{(https://medium.com/@kevalvivek4/pok%C3%A9mon-showdown-with-reinforcement-learning-f5aad9a93cef}{(link)} &
+Implementasi RL pada simulator Pokémon Showdown &
+Pertarungan Pokémon dengan lingkungan web dan model A2C / env wrapper &
+Desain state, reward, dan pemilihan lingkungan menentukan perilaku agen; reward yang tidak proporsional dapat membuat kebijakan menyimpang. &
+Menunjukkan bahwa Pokémon Showdown layak dijadikan lingkungan RL, sekaligus menegaskan pentingnya reward engineering yang terkontrol. \\
+\addlinespace
+
+Park et al., \textit{Distribution-Aware Reward} \href{(https://arxiv.org/html/2605.20740v1}{(link)} &
+Reward berbasis distribusi dan leave-one-out credit assignment &
+Regresi berbasis multi-rollout pada model bahasa besar &
+Reward yang mempertimbangkan kontribusi sampel terhadap distribusi keseluruhan dapat menjaga diversitas keluaran dan kalibrasi prediksi. &
+Menguatkan prinsip bahwa reward sebaiknya tidak hanya menilai kondisi instan, tetapi juga struktur keadaan yang diharapkan dalam jangka lebih panjang. \\
+
+\end{longtable}
+
+Secara konseptual, proyek ini berada pada irisan antara RL tabular klasik dan \textit{environment-driven decision making}. Berbeda dari studi RL yang memanfaatkan jaringan saraf besar dan ruang state kontinu, proyek ini memakai representasi state diskret yang kecil, sehingga pendekatan tabel masih memadai. Perbedaan utama dibanding contoh implementasi Pokémon Showdown berbasis deep RL adalah pemilihan model yang lebih ringan, ruang aksi yang dibatasi pada aksi yang tersedia per giliran, dan reward shaping yang dibuat modular agar pengaruh setiap komponen dapat dianalisis secara terpisah. Dengan demikian, kontribusi proyek ini bukan pada pengembangan arsitektur model baru, melainkan pada penyusunan formulasi RL yang terukur, dapat dijelaskan, dan cocok untuk domain pertarungan berbasis giliran.
+
+\section{Landasan Teori Model yang Dipilih}
+Model yang digunakan pada proyek ini adalah \textit{tabular Q-learning}. Pemilihan model ini sesuai dengan karakter lingkungan Pokémon Showdown yang memiliki keputusan diskret, umpan balik berurutan, dan konsekuensi jangka panjang. Pada setiap state pertarungan, agen menyimpan nilai \(Q(s,a)\), yaitu estimasi nilai jangka panjang dari memilih aksi \(a\) pada state \(s\). Nilai ini diperbarui berdasarkan reward yang diterima pada langkah tersebut dan estimasi nilai state berikutnya.
+
+Secara umum, pembelajaran Q-learning mengikuti persamaan Bellman tereduksi berikut:
+
+\begin{equation}
+\label{eq:persamaan-utama}
+Q(s,a) \leftarrow Q(s,a) + \alpha \bigl[r + \gamma \max_{a'} Q(s',a') - Q(s,a)\bigr]
+\end{equation}
+
+dengan \(s\) adalah state saat ini, \(a\) adalah aksi yang dipilih, \(r\) adalah reward setelah aksi dijalankan, \(s'\) adalah state berikutnya, \(\alpha\) adalah \textit{learning rate}, dan \(\gamma\) adalah \textit{discount factor}. Jika reward positif diperoleh karena aksi yang benar, nilai \(Q(s,a)\) meningkat; jika aksi tersebut tidak efektif, nilai Q turun. Mekanisme ini memungkinkan agen mempelajari kebijakan yang lebih baik tanpa model eksplisit dinamika lingkungan.
+
+Pada implementasi ini, state yang digunakan berupa ringkasan kondisi pertarungan, yaitu bucket HP aktif pemain, bucket HP aktif lawan, serta tipe utama dan tipe sekunder kedua Pokémon aktif. Representasi tersebut sengaja dibuat kecil agar tabel Q tetap terkelola, tetapi masih membawa informasi yang relevan terhadap pengambilan keputusan. Ruang aksi juga diskret karena pada satu giliran agen memilih salah satu move yang tersedia.
+
+Selain pembaruan Q, proses pemilihan aksi menggunakan eksplorasi \textit{softmax}. Probabilitas memilih aksi \(a\) pada state \(s\) dituliskan sebagai:
+
+\begin{equation}
+\label{eq:softmax-policy}
+\pi(a\mid s) = \frac{\exp(\lambda \hat{Q}(s,a))}{\sum_b \exp(\lambda \hat{Q}(s,b))}
+\end{equation}
+
+dengan \(\lambda\) adalah parameter temperatur dan \(\hat{Q}(s,a)\) adalah nilai Q yang telah dinormalisasi secara lokal pada aksi yang tersedia. Formulasi ini menjaga eksplorasi tetap ada, tetapi tetap memberi bobot lebih tinggi pada aksi dengan nilai yang lebih baik.
+
+Untuk memperkaya sinyal belajar, reward pada proyek ini tidak hanya berasal dari kemenangan atau kekalahan terminal, tetapi juga dari shaping reward per langkah. Secara konseptual, komponen potensial ditulis sebagai:
+
+\begin{equation}
+\label{eq:potential-shaping}
+F(s,s') = \gamma \Phi(s') - \Phi(s)
+\end{equation}
+
+di mana \(\Phi(s)\) adalah fungsi potensial yang merangkum kondisi strategis state, seperti total HP tim, jumlah Pokémon yang masih hidup, dan perkiraan keuntungan tipe. Bentuk ini dipilih karena menjaga arah optimasi tetap konsisten dengan tujuan asli, yaitu memenangkan pertarungan.
+
+%------------------------------------------------------------------
+% Gambar 1: Arsitektur Q-Learning (loop diagram)
+%------------------------------------------------------------------
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  every node/.style = {font=\small},
+  box/.style = {rectangle, rounded corners=3pt, draw=black, fill=gray!10,
+                minimum width=6.5cm, minimum height=0.65cm, align=center},
+  arr/.style = {-{Triangle[length=5pt,width=4pt]}, thick}
+]
+  \node[box] at (0,  0.0) (A) {State pertarungan};
+  \node[box] at (0, -1.4) (B) {Encoding state diskret};
+  \node[box] at (0, -2.8) (C) {Tabel Q \(Q(s,a)\)};
+  \node[box] at (0, -4.2) (D) {Kebijakan \textit{softmax}};
+  \node[box] at (0, -5.6) (E) {Aksi move terpilih};
+  \node[box] at (0, -7.0) (F) {Simulator pertarungan};
+  \node[box] at (0, -8.4) (G) {Reward shaping + terminal reward};
+  \node[box] at (0, -9.8) (H) {Pembaruan Q};
+
+  \draw[arr] (A) -- (B);
+  \draw[arr] (B) -- (C);
+  \draw[arr] (C) -- (D);
+  \draw[arr] (D) -- (E);
+  \draw[arr] (E) -- (F);
+  \draw[arr] (F) -- (G);
+  \draw[arr] (G) -- (H);
+  \draw[arr] (H.east) -- (4.5,-9.8) -- (4.5,0) -- (A.east);
+\end{tikzpicture}
+\caption{Arsitektur Q-Learning pada Pokémon Showdown}
+\label{fig:arsitektur}
+\end{figure}
+
+Struktur di atas menunjukkan bahwa model tidak mempelajari visual, teks, atau urutan token, melainkan mempelajari kebijakan keputusan dari ringkasan state yang telah didiskretkan. Dengan demikian, proses belajar bersifat langsung dan sesuai dengan format keputusan turn-based.
+
+\begin{equation}
+\label{eq:potential-definition}
+\Phi(s) = w_{hp}\bigl(\textstyle\sum \text{HP}_{my} - \sum \text{HP}_{opp}\bigr)
+        + w_{alive}(alive_{my} - alive_{opp})
+        + w_{type} \cdot type\_advantage(s)
+\end{equation}
+
+dengan \(\sum \text{HP}_{my}\) adalah total fraksi HP tim sendiri, \(\sum \text{HP}_{opp}\) adalah total fraksi HP tim lawan, \(alive_{my}\) adalah jumlah Pokémon sendiri yang masih hidup, \(alive_{opp}\) adalah jumlah Pokémon lawan yang masih hidup, dan \(type\_advantage(s)\) adalah skor keuntungan tipe pada state tersebut.
+
+\section{Justifikasi Ilmiah Pemilihan Pendekatan AI}
+Pendekatan tabular Q-learning dipilih karena sesuai dengan karakter masalah yang dihadapi. Pertama, ruang aksi pada setiap giliran terbatas dan jelas, yaitu memilih salah satu move yang tersedia. Kedua, state yang dipakai tidak membutuhkan representasi beresolusi tinggi; ringkasan HP dan tipe sudah cukup untuk menangkap struktur keputusan utama pada pertarungan Gen 1. Ketiga, simulator Pokémon Showdown menyediakan interaksi online yang berulang, sehingga agen dapat belajar langsung dari pengalaman tanpa memerlukan dataset berlabel.
+
+Jika dibandingkan dengan pendekatan deep RL seperti DQN atau PPO, tabular Q-learning memiliki beberapa keuntungan operasional pada kasus ini. Ukuran model jauh lebih kecil, interpretasi nilai Q lebih mudah dilakukan, dan proses pembaruan lebih stabil ketika ruang state tidak terlalu besar. Deep RL biasanya lebih unggul ketika state sangat besar, observasi berbentuk piksel, atau hubungan antarfitur bersifat sangat nonlinier. Pada proyek ini, kondisi tersebut tidak dominan karena state sudah diringkas secara manual. Karena itu, menambah kompleksitas model belum tentu memberikan manfaat yang sebanding.
+
+Tradeoff utama yang dipertimbangkan adalah antara kapasitas model dan kebutuhan data. Model yang lebih besar berpotensi menangkap interaksi lebih kompleks, tetapi membutuhkan lebih banyak pengalaman, lebih sensitif terhadap tuning, dan lebih sulit dianalisis. Sebaliknya, model tabel lebih cepat diperbarui, lebih ringan dijalankan, dan cocok untuk eksperimen yang menekankan keterlacakan perubahan nilai selama training. Untuk tugas pertarungan berbasis giliran, interpretabilitas juga penting karena keputusan agen dapat ditelusuri ke state dan aksi tertentu.
+
+Pendekatan ini juga selaras dengan sifat domain Pokémon yang mengandung uncertainty, tetapi tetap memiliki struktur keputusan yang diskret. Informasi seperti HP, tipe, dan status kondisi cukup kuat untuk membedakan pilihan aksi yang masuk akal, sedangkan dinamika acak seperti \textit{critical hit} atau akurasi serangan tetap ditangani oleh lingkungan. Dengan demikian, Q-learning memberikan keseimbangan yang baik antara kesederhanaan implementasi, efisiensi komputasi, dan kemampuan belajar dari interaksi langsung.
+
+\section{\textit{Block Diagram} Sistem End-to-End}
+Alur sistem end-to-end dimulai dari simulator Pokémon Showdown yang menghasilkan state pertarungan aktual. State tersebut kemudian diproses oleh modul encoding untuk menghasilkan tuple diskret. Tuple ini menjadi kunci pencarian di tabel Q. Setelah itu, kebijakan \textit{softmax} memilih aksi berdasarkan nilai Q yang tersedia, lalu aksi dijalankan di simulator. Simulator mengembalikan state baru dan reward, kemudian nilai Q diperbarui menggunakan persamaan Bellman. Proses ini berulang sampai pertarungan selesai, setelah itu terminal reward dipakai untuk pembaruan akhir.
+
+%------------------------------------------------------------------
+% Gambar 2: Block Diagram Sistem
+%------------------------------------------------------------------
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  every node/.style = {font=\small},
+  box/.style = {rectangle, rounded corners=3pt, draw=black, fill=gray!10,
+                minimum width=7cm, minimum height=0.65cm, align=center},
+  arr/.style = {-{Triangle[length=5pt,width=4pt]}, thick}
+]
+  \node[box] at (0,  0.0) (A) {Pokémon Showdown};
+  \node[box] at (0, -1.4) (B) {State pertarungan aktual};
+  \node[box] at (0, -2.8) (C) {State encoding: bucket HP + tipe};
+  \node[box] at (0, -4.2) (D) {Tabel Q $\rightarrow$ kebijakan softmax};
+  \node[box] at (0, -5.6) (E) {Pemilihan move};
+  \node[box] at (0, -7.0) (F) {Simulator mengeksekusi aksi};
+  \node[box] at (0, -8.4) (G) {Reward shaping + terminal reward};
+  \node[box] at (0, -9.8) (H) {Update Q-value};
+
+  \draw[arr] (A) -- (B);
+  \draw[arr] (B) -- (C);
+  \draw[arr] (C) -- (D);
+  \draw[arr] (D) -- (E);
+  \draw[arr] (E) -- (F);
+  \draw[arr] (F) -- (G);
+  \draw[arr] (G) -- (H);
+  \draw[arr] (H.east) -- (4.8,-9.8) -- (4.8,0) -- (A.east);
+\end{tikzpicture}
+\caption{Block diagram sistem yang diusulkan}
+\label{fig:block-diagram}
+\end{figure}
+
+Diagram tersebut menunjukkan bahwa pembelajaran berlangsung secara online. Tidak ada tahap pelatihan offline menggunakan dataset statis; seluruh data diperoleh dari pengalaman bertanding yang terjadi selama eksekusi.
+
+\section{\textit{Flowchart} Program}
+Flowchart program dapat dijelaskan sebagai berikut. Pada mode pelatihan, program memulai koneksi ke simulator, mengambil state awal, memilih aksi dengan eksplorasi \textit{softmax}, mengeksekusi aksi, lalu menghitung reward dan memperbarui Q-table. Jika pertarungan belum selesai, sistem kembali ke tahap pemilihan aksi dengan state terbaru. Jika pertarungan selesai, terminal reward diproses dan statistik pelatihan diperbarui. Pada mode evaluasi, alur yang sama dipakai, tetapi pemilihan aksi berubah menjadi greedy, yaitu memilih aksi dengan nilai Q tertinggi tanpa eksplorasi.
+
+%------------------------------------------------------------------
+% Gambar 3: Flowchart Training & Inference
+%------------------------------------------------------------------
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  every node/.style  = {font=\small},
+  startstop/.style   = {ellipse, draw=black, fill=gray!20,
+                         minimum width=3.2cm, minimum height=0.65cm, align=center},
+  process/.style     = {rectangle, rounded corners=3pt, draw=black, fill=gray!10,
+                         minimum width=6cm, minimum height=0.65cm, align=center},
+  processSm/.style   = {rectangle, rounded corners=3pt, draw=black, fill=gray!10,
+                         minimum width=2.8cm, minimum height=0.65cm, align=center},
+  decision/.style    = {diamond, draw=black, fill=yellow!20,
+                         minimum width=3cm, minimum height=1cm,
+                         aspect=2.5, align=center},
+  arr/.style         = {-{Triangle[length=5pt,width=4pt]}, thick},
+  lbl/.style         = {font=\small\itshape, inner sep=2pt}
+]
+  % Kolom tengah
+  \node[startstop] at (0,   0.0) (start)  {Mulai};
+  \node[process]   at (0,  -1.5) (init)   {Inisialisasi agen, opponent, dan parameter};
+  \node[process]   at (0,  -3.0) (begin)  {Pertarungan dimulai};
+  \node[process]   at (0,  -4.5) (encode) {Encode state};
+  \node[decision]  at (0,  -6.2) (mode)   {Mode training?};
+  % Cabang
+  \node[processSm] at (-3.5, -8.0) (soft)  {Pilih aksi softmax};
+  \node[processSm] at ( 3.5, -8.0) (greed) {Pilih aksi greedy};
+  % Lanjut tengah
+  \node[process]   at (0,  -9.8)  (run)    {Jalankan aksi di simulator};
+  \node[process]   at (0, -11.3)  (reward) {Hitung reward dan update Q};
+  \node[decision]  at (0, -13.0)  (done)   {Battle selesai?};
+  \node[process]   at (0, -14.8)  (term)   {Terminal reward + reset state};
+  \node[startstop] at (0, -16.2)  (end)    {Selesai};
+
+  % Panah utama
+  \draw[arr] (start)  -- (init);
+  \draw[arr] (init)   -- (begin);
+  \draw[arr] (begin)  -- (encode);
+  \draw[arr] (encode) -- (mode);
+
+  % Cabang mode training
+  \draw[arr] (mode.west) -- node[lbl,above]{Ya}    (-3.5,-6.2) -- (soft);
+  \draw[arr] (mode.east) -- node[lbl,above]{Tidak} ( 3.5,-6.2) -- (greed);
+
+  % Gabung kembali ke run
+  \draw[arr] (soft.south)  -- (-3.5,-9.0) -- (run.west);
+  \draw[arr] (greed.south) -- ( 3.5,-9.0) -- (run.east);
+
+  \draw[arr] (run)    -- (reward);
+  \draw[arr] (reward) -- (done);
+  \draw[arr] (done)   -- node[lbl,right]{Ya} (term);
+  \draw[arr] (term)   -- (end);
+
+  % Loop Tidak kembali ke encode
+  \draw[arr] (done.west) -- (-4.8,-13.0)
+             -- node[lbl,left]{Tidak} (-4.8,-4.5)
+             -- (encode.west);
+\end{tikzpicture}
+\caption{Flowchart program training dan inference}
+\label{fig:flowchart}
+\end{figure}
+
+%==============================================================================
+% BAB III - IMPLEMENTASI & HASIL EKSPERIMEN
+%==============================================================================
+\chapter{IMPLEMENTASI \& HASIL EKSPERIMEN}
+\label{bab:implementasi}
+
+\section{Dataset \& Pra-pemrosesan}
+
+Berbeda dengan pendekatan \textit{supervised learning} yang bergantung pada data berlabel, proyek ini menggunakan paradigma \textit{reinforcement learning} di mana data pengalaman dihasilkan secara langsung melalui interaksi agen dengan lingkungan simulasi. Lingkungan yang digunakan adalah server lokal Pokémon Showdown (versi \textit{open-source}), yang mensimulasikan \textit{logic} pertarungan \textit{Gen 1} (Kanto) secara lengkap termasuk perhitungan damage, \textit{healing move}, dan \textit{type effectiveness}.
+
+\subsection*{Sumber Data Pengalaman}
+
+Setiap episode pelatihan merupakan satu pertandingan utuh dalam format \texttt{gen1ou}. Agen kita menggunakan tim tetap (\textit{fixed team}) yang terdiri dari enam Pokémon tier OU Generasi~1, yaitu: Alakazam, Snorlax, Tauros, Starmie, Exeggutor, dan Chansey. Pemilihan keenam Pokémon ini mengikuti \textit{metagame} kompetitif Gen~1, kesemuanya tergolong Pokémon dengan \textit{usage rate} tertinggi di format tersebut.
+
+Di sisi lawan, tim disusun secara acak pada setiap pertandingan dengan mengambil 6 Pokémon dari \textit{custom opponent pool} yang berisi 50 Pokémon Gen~1. Pool ini disusun secara manual oleh tim dengan mempertimbangkan variasi tipe, peran pertarungan, dan kelayakan \textit{moveset} dalam format Gen~1. Adapun \textit{Generative AI} Claude Opus 4.6 digunakan sebagai alat bantu untuk memberikan referensi awal \textit{moveset}, tetapi seleksi akhir, penyesuaian, dan kurasi Pokémon tetap dilakukan oleh tim. Pengacakan ini membuat \textit{agent} terpapar pada variasi \textit{matchup} yang lebih luas selama \textit{training}, sehingga \textit{policy} yang dipelajari tidak hanya bergantung pada satu komposisi lawan tertentu.
+
+\subsection*{Representasi State (Pra-pemrosesan)}
+
+Agar Q-table tidak terlalu besar, informasi \textit{battle} diringkas menjadi vektor state berdimensi kecil. Proses pra-pemrosesan dilakukan setiap giliran (\textit{turn}) dan terdiri dari langkah-langkah berikut:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Diskretisasi HP.} Fraksi (Selisih) HP Pokémon aktif milik pemain dan lawan masing-masing dibagi ke dalam 10 \textit{bucket} (0--9). Misalnya, Pokémon dengan HP 73\% masuk ke bucket~7. Teknik ini mengurangi ruang state kontinu menjadi diskret tanpa kehilangan informasi signifikan tentang kondisi pertarungan.
+    \item \textbf{Ekstraksi tipe.} Tipe primer dan sekunder dari Pokémon aktif kedua belah pihak dicatat sebagai fitur kategorikal. Informasi tipe ini krusial karena menjadi dasar \textit{type effectiveness} dalam kalkulasi damage di Gen~1.
+\end{enumerate}
+
+Hasil akhirnya berupa tuple 6-elemen: 
+
+\texttt{(player\_hp\_bucket, opp\_hp\_bucket, player\_type\_1, player\_type\_2, opp\_type\_1, opp\_type\_2)}. 
+
+Kombinasi fitur-fitur ini membentuk kunci unik pada Q-table.
+
+\begin{table}[h!]
+\centering
+\caption{Komponen vektor state dan rentang nilainya}
+\label{tab:state-features}
+\begin{tabular}{llp{6.5cm}}
+\toprule
+\textbf{Fitur} & \textbf{Tipe Data} & \textbf{Keterangan} \\
+\midrule
+\texttt{player\_hp\_bucket}  & Integer (0--9) & HP Pokémon aktif pemain, didiskretisasi per 10\% \\
+\texttt{opp\_hp\_bucket}     & Integer (0--9) & HP Pokémon aktif lawan, didiskretisasi per 10\% \\
+\texttt{player\_type\_1}     & Kategorikal    & Tipe primer Pokémon aktif pemain (15 tipe Gen~1) \\
+\texttt{player\_type\_2}     & Kategorikal    & Tipe sekunder pemain, atau ``NONE'' jika mono-type \\
+\texttt{opp\_type\_1}        & Kategorikal    & Tipe primer Pokémon aktif lawan \\
+\texttt{opp\_type\_2}        & Kategorikal    & Tipe sekunder lawan, atau ``NONE'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Pembagian Episode Pelatihan dan Evaluasi}
+
+Karena sifat \textit{online} dari Q-Learning, tidak ada pembagian \textit{train/validation/test} di algoritma ini. Sebagai gantinya, evaluasi dilakukan setelah fase pelatihan selesai, dengan kebijakan \textit{greedy} (tanpa eksplorasi) melawan lawan baru yang belum pernah ditemui selama pelatihan.
+
+\begin{table}[h!]
+\centering
+\caption{Pembagian episode pertarungan}
+\label{tab:split-data}
+\begin{tabular}{lrp{7cm}}
+\toprule
+\textbf{Fase} & \textbf{Jumlah Pertarungan} & \textbf{Keterangan} \\
+\midrule
+Pelatihan  & 5.000 & Agen belajar dengan eksplorasi \textit{softmax}; Q-table diperbarui setiap giliran \\
+Evaluasi   & 1.000 & Kebijakan \textit{greedy} (argmax Q); lawan acak baru \\
+\midrule
+\textbf{Total} & \textbf{6.000} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Seed acak untuk pemilihan tim lawan dikelola oleh modul \texttt{random} Python bawaan dan library \texttt{numpy}. Karena lawan di-\textit{randomize} setiap pertandingan secara sengaja , kami tidak memiliki seed global, variasi ini justru menjadi fitur, bukan \textit{bug}.
+
+\section{Konfigurasi Eksperimen}
+
+Metode yang digunakan adalah \textit{tabular Q-Learning} dengan eksplorasi \textit{softmax}. Karena pendekatan ini bersifat \textit{online} dan berbasis tabel (bukan \textit{neural network}), tidak ada konsep \textit{batch size}, \textit{optimizer}, maupun \textit{scheduler} seperti pada \textit{deep learning}. Pembaruan Q-value dilakukan langsung setiap giliran (\textit{turn}) dalam pertarungan.
+
+\subsection*{Hyperparameter}
+
+\begin{table}[h!]
+\centering
+\caption{Hyperparameter eksperimen}
+\label{tab:hyperparam}
+\begin{tabular}{lll}
+\toprule
+\textbf{Parameter} & \textbf{Nilai} & \textbf{Keterangan} \\
+\midrule
+$\alpha$ (\textit{learning rate})     & 0.10  & Seberapa besar Q-value diperbarui tiap \textit{step} \\
+$\gamma$ (\textit{discount factor})   & 0.95  & Bobot \textit{future reward} terhadap \textit{immediate reward} \\
+$\lambda$ (\textit{softmax temperature}) & 1.0 & Mengontrol tingkat eksplorasi vs eksploitasi \\
+Jumlah episode pelatihan              & 5.000 & Satu episode = satu pertandingan utuh \\
+Jumlah episode evaluasi               & 500   & \textit{greedy rule}, tanpa eksplorasi \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Fungsi Reward}
+
+Agen menerima \textit{reward} pada dua kondisi:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Terminal reward} (diberikan saat pertarungan berakhir):
+    \begin{itemize}
+        \item Menang: $+100$
+        \item Kalah: $-100$
+    \end{itemize}
+    \item \textbf{Intermediate reward} (diberikan setiap giliran selama pertandingan berlangsung, dihitung sebagai selisih fraksi HP [HP saat ini dibagi HP maksimum] dikali faktor skala):
+    \begin{equation}
+    r_t = (\text{HP}_{\text{player}} - \text{HP}_{\text{opponent}}) \times 5.0
+    \end{equation}
+    Faktor 5.0 dipilih agar sinyal per giliran cukup besar untuk mempercepat pembelajaran, tapi tetap jauh lebih kecil dari \textit{terminal reward} ($\pm 100$). Karena selisih fraksi HP berkisar $[-1, +1]$, maka \textit{intermediate reward} per giliran berada di rentang $[-5, +5]$. Dengan demikian agen tetap memprioritaskan kemenangan sebagai tujuan utama, tapi tetap mendapat \textit{feedback} setiap giliran tanpa harus menunggu akhir pertarungan.
+\end{enumerate}
+
+\subsection*{Hardware dan Framework}
+
+\begin{table}[h!]
+\centering
+\caption{Spesifikasi hardware dan software}
+\label{tab:hardware}
+\begin{tabular}{ll}
+\toprule
+\textbf{Komponen} & \textbf{Detail} \\
+\midrule
+Prosesor       & Intel Core i7 Gen-13 (laptop) \\
+GPU            & --- (tidak digunakan) \\
+Framework      & \texttt{poke-env} $\geq$ 0.15.0, \texttt{numpy} $\geq$ 1.24.0 \\
+Simulator      & Pokémon Showdown (server lokal, Node.js) \\
+Bahasa         & Python 3.11 \\
+Durasi training & $\approx$ 706 detik ($\sim$12 menit) untuk 5.000 pertarungan \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Karena Q-Learning tabular hanya menyimpan dan membaca nilai dari \textit{dictionary}, seluruh komputasi berjalan di CPU tanpa memerlukan akselerasi GPU. Durasi training didominasi oleh overhead komunikasi antara agen Python dan server Pokémon Showdown via \textit{websocket}.
+
+\section{Metrik Evaluasi}
+
+Dalam konteks \textit{reinforcement learning} untuk permainan, metrik utama yang paling relevan adalah \textit{win rate}. Metrik ini dipilih karena tujuan akhir agen memang memenangkan pertarungan, bukan sekadar memaksimalkan \textit{reward} kumulatif (agen bisa saja mendapat banyak \textit{intermediate reward} tapi tetap kalah di akhir).
+
+\begin{table}[h!]
+\centering
+\caption{Metrik evaluasi yang digunakan}
+\label{tab:metrik}
+\begin{tabular}{llp{7cm}}
+\toprule
+\textbf{Metrik} & \textbf{Fase} & \textbf{Justifikasi} \\
+\midrule
+\textit{Win rate} (evaluasi) & Evaluasi & Metrik utama; mengukur seberapa baik kebijakan yang sudah dipelajari ketika dijalankan secara \textit{greedy} tanpa eksplorasi \\
+\textit{Win rate} (training) & Pelatihan & Indikator konvergensi; apakah agen membaik seiring bertambahnya episode \\
+Jumlah \textit{Q-table states} & Pelatihan & Mengukur seberapa luas ruang state yang berhasil dieksplorasi agen selama pelatihan \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent \textit{Win rate} evaluasi dihitung setelah pelatihan selesai, menggunakan aturan \textit{greedy} ($\arg\max_a Q(s,a)$) melawan lawan acak yang timnya mungkin tidak pernah ditemui saat pelatihan. Ini memastikan metrik mencerminkan kemampuan generalisasi, bukan sekadar hafalan terhadap lawan tertentu.
+
+\section{Hasil Kuantitatif}
+
+Tabel berikut merangkum performa agen kami dan membandingkannya dengan hasil dari paper acuan Kalose, Kaya, \& Kim yang menggunakan pendekatan serupa (Q-Learning dengan \textit{softmax} dan \textit{epsilon-greedy}) namun pada simulator deterministik buatan sendiri dengan tim acak di \textbf{kedua} sisi.
+
+\begin{table}[h!]
+\centering
+\caption{Perbandingan \textit{win rate} terhadap paper acuan (Kalose et al.)}
+\label{tab:hasil}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Metode} & \textbf{Kondisi} & \textbf{Paper Acuan} & \textbf{Proyek Kami} \\
+\midrule
+Softmax (5.000 games)        & vs Random & 65\% & 93,2\% \\
+Softmax (20.000 games)       & vs Random & 70\% & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Detail hasil eksperimen proyek kami}
+\label{tab:hasil-detail}
+\begin{tabular}{lr}
+\toprule
+\textbf{Metrik} & \textbf{Nilai} \\
+\midrule
+\textit{Win rate} training (5.000 battles, softmax)  & 84,7\% (4.228 W / 766 L) \\
+\textit{Win rate} evaluasi (500 battles, greedy)     & 93,2\% (466 / 500) \\
+Jumlah Q-table states yang ditemukan                 & 7.367 \\
+Durasi training                                      & 705,7 detik \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Beberapa hal yang bisa dilihat dari perbandingan di atas:
+
+\begin{itemize}[leftmargin=*]
+    \item Dengan jumlah episode yang sama (5.000), \textit{win rate} kami (93,2\%) jauh melampaui paper acuan (65\%). Perbedaan utama terletak pada desain eksperimen: paper acuan menggunakan tim acak di \textbf{kedua sisi} (agen dan lawan sama-sama random team), sementara proyek kami meng-\textit{fix} tim agen dengan 6 Pokémon OU terbaik Gen~1. Ini memberi keuntungan besar karena agen hanya perlu belajar strategi untuk satu komposisi tim yang sudah kuat secara \textit{metagame}.
+    \item \textit{Win rate} evaluasi (93,2\%) lebih tinggi dari training (84,7\%) karena saat evaluasi agen murni \textit{greedy} dan tidak lagi mengeksplorasi \textit{move} suboptimal.
+    \item Paper acuan juga menggunakan simulator deterministik (tanpa \textit{miss chance}, tanpa \textit{critical hit}), sedangkan kami menggunakan Pokémon Showdown yang mensimulasikan \textit{battle} Gen~1 secara penuh termasuk elemen stokastik. Meskipun demikian, keunggulan tim yang sudah di-\textit{fix} tampaknya lebih dominan pengaruhnya.
+    \item Jumlah 7.367 state menunjukkan ruang state masih cukup kecil untuk \textit{tabular} Q-Learning, konvergensi tercapai tanpa memerlukan \textit{function approximation}.
+\end{itemize}
+
+\section{Analisis \textit{Hyperparameter Tuning}}
+\begin{petunjuk}
+Dokumentasi proses tuning (\textit{grid/random/Bayesian search}). Sertakan grafik metrik vs hyperparameter kunci. Diskusikan hyperparameter mana yang paling sensitif.
+\end{petunjuk}
+
+Proses \textit{hyperparameter tuning} dilakukan dengan pendekatan \textit{grid search} satu dimensi (\textit{one-at-a-time sweep}), yaitu memvariasikan satu parameter pada satu waktu sambil mengunci parameter lainnya pada nilai \textit{baseline}. Parameter yang diuji adalah \textit{learning rate} ($\alpha$), \textit{discount factor} ($\gamma$), dan temperatur \textit{softmax} ($\lambda$). Setiap konfigurasi dijalankan dengan 8.000 episode pelatihan dan 500 episode evaluasi \textit{greedy}. Parameter \textit{reward shaping} ($k_d$, $k_t$, $w_{hp}$, $w_{alive}$, $w_{type}$, dan sebagainya) dikunci pada nilai \textit{default} di seluruh percobaan agar pengaruh masing-masing parameter dapat diisolasi.
+
+\begin{table}[h!]
+\centering
+\caption{Hasil lengkap \textit{hyperparameter tuning}}
+\label{tab:tuning-results}
+\begin{tabular}{llllrrl}
+\toprule
+\textbf{ID} & $\boldsymbol{\alpha}$ & $\boldsymbol{\gamma}$ & $\boldsymbol{\lambda}$ & \textbf{Train\%} & \textbf{Eval\%} & \textbf{States} \\
+\midrule
+\texttt{lam\_2.0}   & 0.10 & 0.95 & 2.0 & 90,4\% & \textbf{96,8\%} & 9.459 \\
+\texttt{gamma\_0.99}& 0.10 & 0.99 & 1.0 & 86,1\% & \textbf{96,8\%} & 9.742 \\
+\texttt{gamma\_0.90}& 0.10 & 0.90 & 1.0 & 86,4\% & 96,4\%          & 9.807 \\
+\texttt{lam\_5.0}   & 0.10 & 0.95 & 5.0 & 92,9\% & 96,2\%          & 8.933 \\
+\texttt{lam\_0.5}   & 0.10 & 0.95 & 0.5 & 82,9\% & 96,0\%          & 9.977 \\
+\texttt{alpha\_0.05}& 0.05 & 0.95 & 1.0 & 87,5\% & 96,0\%          & 9.738 \\
+\texttt{baseline}   & 0.10 & 0.95 & 1.0 & 86,8\% & 94,8\%          & 9.772 \\
+\texttt{gamma\_0.80}& 0.10 & 0.80 & 1.0 & 86,6\% & 94,8\%          & 9.833 \\
+\texttt{alpha\_0.20}& 0.20 & 0.95 & 1.0 & 86,1\% & 93,2\%          & 9.808 \\
+\texttt{alpha\_0.30}& 0.30 & 0.95 & 1.0 & 84,0\% & 93,0\%          & 9.847 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Temperatur \textit{softmax} ($\lambda$) adalah parameter paling berpengaruh. Kenaikan dari $\lambda = 1.0$ ke $\lambda = 2.0$ meningkatkan \textit{eval win rate} dari 94,8\% menjadi 96,8\% sekaligus menaikkan \textit{training win rate} dari 86,8\% menjadi 90,4\%, menjadikannya konfigurasi terbaik secara keseluruhan. Pada $\lambda = 5.0$, eksplorasi yang terlalu kecil mulai mengurangi generalisasi (\textit{eval} turun ke 96,2\%), sedangkan $\lambda = 0.5$ tetap kompetitif di 96,0\% berkat keluasan eksplorasi meski \textit{training win rate}-nya terendah (82,9\%). Secara keseluruhan, temuan ini menunjukkan bahwa \textit{baseline} masih terlalu banyak mengeksplorasi aksi suboptimal, dan menaikkan $\lambda$ memperbaiki hal tersebut.
+
+Discount factor ($\gamma$) menempati posisi kedua. Nilai $\gamma = 0.99$ menghasilkan \textit{eval win rate} 96,8\%, setara konfigurasi terbaik, karena agen lebih mempertimbangkan \textit{reward} jangka panjang yang sesuai dengan durasi pertarungan 10--20 giliran. Sebaliknya, $\gamma = 0.80$ menurun ke 94,8\% akibat \textit{myopic behavior}: agen kurang menghargai kemenangan di akhir pertarungan yang panjang.
+
+Learning rate ($\alpha$) adalah parameter paling tidak sensitif. Nilai $\alpha = 0.05$ memberikan 96,0\% karena pembaruan konservatif lebih stabil terhadap elemen stokastik Gen~1, sedangkan $\alpha = 0.20$ dan $\alpha = 0.30$ justru menurunkan performa ke 93,2\% dan 93,0\% karena Q-value menjadi terlalu reaktif terhadap hasil pertarungan yang tidak representatif akibat RNG.
+
+Urutan sensitivitas hyperparameter dari yang paling ke paling tidak berpengaruh adalah: $\lambda > \gamma > \alpha$. Rentang \textit{eval win rate} yang dicakup oleh masing-masing sweep adalah: $\lambda$ menghasilkan rentang 96,0\%--96,8\%; $\gamma$ menghasilkan 94,8\%--96,8\%; $\alpha$ menghasilkan 93,0\%--96,0\%. Menariknya, semua konfigurasi yang diuji tetap menghasilkan \textit{eval win rate} di atas 93\%, yang mengindikasikan bahwa robustness performa lebih banyak berasal dari kekuatan tim \textit{fixed} OU Gen~1 daripada dari sensitivitas hyperparameter itu sendiri.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{tuning_charts.png}
+\caption{Grafik hasil \textit{hyperparameter tuning}: sweep per parameter, ranking seluruh konfigurasi, kurva training, dan cakupan ruang state}
+\label{fig:tuning-charts}
+\end{figure}
+
+\newpage
+\section{Hasil Kualitatif \& \textit{Error Analysis}}
+\begin{petunjuk}
+Contoh prediksi benar \& salah (minimal 3 kasus salah). \textit{Confusion matrix} atau contoh prediksi vs \textit{ground truth} atau \textit{reward curve}. Hipotesis penyebab kegagalan + mitigasi yang dicoba.
+\end{petunjuk}
+
+Secara umum, \textit{win rate} training seluruh konfigurasi menunjukkan tren peningkatan yang konsisten. Pada 500 pertarungan pertama, \textit{win rate} agen berada di kisaran 60--70\% karena Q-table belum terisi dan agen masih sangat bergantung pada eksplorasi acak. Memasuki pertarungan ke-1.000 hingga ke-2.000, kenaikan paling curam terjadi karena agen mulai mengakumulasi state yang sering ditemui dan nilai Q mulai konvergen. Setelah pertarungan ke-3.000, kurva melandai dan \textit{win rate} training stabil di kisaran 84--93\% bergantung pada konfigurasi.
+
+\subsection*{Contoh Kasus Keputusan Benar}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Memanfaatkan \textit{type advantage} melawan Pokémon Air.} Ketika agen menghadapi Starmie lawan (Water/Psychic) dengan kondisi HP setara, agen yang telah dilatih secara konsisten memilih \textit{Thunderbolt} milik Starmie tim sendiri daripada \textit{Surf}. Nilai Q untuk aksi \textit{Thunderbolt} pada state \texttt{(bucket\_hp=5, opp\_bucket=5, Water, Psychic, Water, Psychic)} jauh lebih tinggi karena sinyal \textit{potential-based reward} menangkap keuntungan tipe listrik terhadap air.
+    \item \textbf{Menggunakan \textit{recovery move} saat HP kritis.} Pada state dengan \texttt{player\_hp\_bucket=1} (HP $\leq$10\%), agen cenderung memilih \textit{Recover}/\textit{Rest} jika tersedia, daripada menyerang. Pola ini konsisten dengan reward shaping yang menghukum selisih HP negatif secara berkelanjutan.
+    \item \textbf{Mempertahankan keunggulan HP.} Ketika lawan sudah lemah (\texttt{opp\_hp\_bucket=1}), agen secara konsisten memilih serangan dengan damage tertinggi (misalnya \textit{Hyper Beam} atau \textit{Psychic}) untuk mengakhiri pertarungan secepat mungkin, yang sesuai dengan tingginya nilai Q pada aksi agresif di state tersebut.
+\end{enumerate}
+
+\subsection*{Contoh Kasus Kegagalan}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Gagal menangani \textit{sleep} dan status kondisi.} Ketika Pokémon agen terkena \textit{Sleep Powder} atau \textit{Hypnosis}, state yang direpresentasikan tidak mencakup informasi status kondisi. Akibatnya, agen terus memilih move seperti biasa tanpa menyadari bahwa Pokémon aktifnya tidak bisa bergerak, sehingga giliran terbuang sia-sia. Kasus ini ditemukan berulang saat menghadapi Exeggutor atau Jynx lawan.
+
+    \textit{Hipotesis:} Absennya fitur status kondisi (tidur, lumpuh, keracunan) dalam representasi state menyebabkan agen tidak memiliki mekanisme untuk merespons situasi tersebut. \textit{Mitigasi yang dapat dicoba:} menambahkan fitur biner status kondisi Pokémon aktif ke dalam tuple state.
+
+    \item \textbf{Keputusan suboptimal ketika nilai Q hampir seragam.} Pada state yang jarang ditemui selama pelatihan (terutama kombinasi tipe langka seperti Ghost atau Dragon), Q-table memiliki nilai yang hampir seragam untuk semua aksi karena jarang diperbarui. Akibatnya, agen memilih aksi secara \textit{near-random}, termasuk menggunakan \textit{Night Shade} pada Pokémon Normal yang imun terhadapnya.
+
+    \textit{Hipotesis:} Kurangnya kunjungan pada state langka menyebabkan estimasi Q yang tidak akurat. Jumlah 9.000--10.000 state yang ditemukan memang mencakup sebagian besar kondisi umum, tetapi kombinasi tipe yang jarang tetap tidak terepresentasi dengan baik. \textit{Mitigasi yang dapat dicoba:} meningkatkan jumlah episode pelatihan untuk state langka, atau menambahkan \textit{optimistic initialization} pada Q-table.
+
+    \item \textbf{Tidak melakukan \textit{switch} secara strategis.} Implementasi saat ini membatasi aksi agen hanya pada pemilihan \textit{move}, tanpa opsi \textit{switch} Pokémon sebagai bagian dari ruang aksi yang dipelajari. Akibatnya, agen tidak dapat keluar dari \textit{type disadvantage} secara eksplisit. Sebagai contoh, ketika Snorlax agen menghadapi Machamp lawan (Fighting), agen tidak memiliki pilihan untuk \textit{switch} ke Starmie atau Alakazam yang lebih menguntungkan.
+
+    \textit{Hipotesis:} Pembatasan ruang aksi ini merupakan batasan desain yang disengaja untuk menjaga state space tetap kecil. Meskipun \textit{potential-based reward} secara implisit mendorong \textit{switch} melalui komponen $w_{type}$, mekanisme ini tidak cukup untuk menggantikan \textit{switch} eksplisit. \textit{Mitigasi yang dapat dicoba:} memperluas ruang aksi untuk menyertakan aksi \textit{switch} dengan representasi state yang diperluas.
+\end{enumerate}
+
+Dari 500 pertarungan evaluasi pada konfigurasi terbaik (\texttt{lam\_2.0}), agen memenangkan 484 pertarungan dan kalah pada 16 pertarungan, menghasilkan \textit{eval win rate} 96,8\%. Kekalahan terkonsentrasi pada skenario di mana lawan memiliki Pokémon dengan \textit{sleep-inducing move} (Exeggutor, Jynx, Venusaur) atau ketika agen secara tidak beruntung terkena serangkaian \textit{critical hit} berturut-turut. Kedua skenario ini berkaitan dengan elemen stokastik simulator yang tidak dapat sepenuhnya diantisipasi oleh representasi state yang ada.
+
+
+\section{Pembahasan}
+\begin{petunjuk}
+Interpretasi hasil terhadap rumusan masalah Bab I. Perbandingan dengan literatur (lebih baik / setara / lebih buruk → mengapa?). Keterbatasan eksperimen.
+\end{petunjuk}
+
+\textbf{RM1}: Konsep \textit{reinforcement learning} berhasil diterapkan secara penuh melalui siklus interaksi agen--lingkungan yang berlangsung online. Agen mengobservasi state, memilih aksi berdasarkan kebijakan \textit{softmax}, dan memperbarui Q-table menggunakan persamaan Bellman setiap giliran. Pelatihan selama 5.000 episode menghasilkan Q-table dengan 9.000--10.000 state unik, menunjukkan eksplorasi yang memadai tanpa kebutuhan \textit{function approximation}.
+
+\textbf{RM2}: Representasi state berbasis enam fitur (bucket HP pemain, bucket HP lawan, dua tipe pemain, dua tipe lawan) terbukti cukup untuk memandu kebijakan yang efektif. Ruang aksi yang dibatasi pada pemilihan \textit{move} (maksimum 4 aksi per giliran) memungkinkan Q-table tetap terkelola. Desain \textit{reward} berlapis (terminal reward $\pm 100$ ditambah \textit{intermediate reward} berbasis selisih HP dan \textit{potential-based shaping}) memberikan sinyal pembelajaran yang kaya setiap giliran tanpa membalikkan prioritas utama memenangkan pertarungan.
+
+\textbf{RM3}: Agen mencapai \textit{eval win rate} hingga 96,8\% terhadap lawan acak, melampaui hasil paper acuan Kalose et al.\ yang melaporkan 65\% pada jumlah episode yang sama. Keterbatasan utama yang diidentifikasi adalah: (1) tidak adanya mekanisme \textit{switch} Pokémon dalam ruang aksi; (2) absennya fitur status kondisi dalam representasi state; dan (3) estimasi Q yang lemah pada state langka.
+
+Hasil proyek ini secara kuantitatif melampaui paper acuan Kalose et al.\ (96,8\% vs 65\% pada 5.000 episode). Namun perlu dicatat bahwa perbandingan ini tidak sepenuhnya \textit{apple-to-apples}: paper acuan menggunakan tim acak di kedua sisi, sementara proyek ini menggunakan tim tetap OU Gen~1 untuk agen. Keunggulan ini disumbangkan oleh tiga faktor: (1) tim tetap yang secara metagame sudah optimal mengurangi kompleksitas kebijakan yang perlu dipelajari; (2) \textit{reward shaping} berbasis potensi memberikan sinyal yang lebih informatif dibanding reward terminal saja; (3) jumlah state yang relatif kecil ($\sim$9.000--10.000) memungkinkan konvergensi yang lebih cepat.
+
+Dibandingkan dengan pendekatan \textit{deep RL} pada Pokémon Showdown seperti yang diulas oleh Vivek Keval et al., pendekatan tabular ini lebih mudah dianalisis dan direproduksi, meskipun tidak dapat menskalakan ke ruang state yang lebih besar. Temuan bahwa $\lambda$ dan $\gamma$ lebih berpengaruh daripada $\alpha$ juga konsisten dengan observasi umum pada literatur sensitivitas hyperparameter RL (AutoML.org), yang menyebutkan bahwa parameter eksplorasi dan \textit{horizon} sering kali lebih kritis daripada kecepatan pembaruan pada lingkungan berdimensi rendah.
+
+\subsection*{Keterbatasan Eksperimen}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Tidak ada mekanisme \textit{switch}.} Ruang aksi yang dibatasi hanya pada \textit{move} menyebabkan agen tidak dapat merespons \textit{type disadvantage} secara eksplisit. Hal ini merupakan penyederhanaan yang disengaja, tetapi membatasi kemampuan generalisasi terhadap strategi pertarungan yang lebih kompleks.
+    \item \textbf{Representasi state yang terbatas.} Fitur status kondisi (tidur, lumpuh, \textit{burn}, \textit{freeze}), momentum serangan, dan informasi \textit{moveset} lawan tidak dimasukkan ke dalam state. Akibatnya, agen berperilaku identik terlepas dari apakah Pokémon aktifnya sedang tertidur atau sehat.
+    \item \textbf{Lawan yang terbatas pada \textit{RandomPlayer}.} Evaluasi hanya dilakukan terhadap lawan yang memilih aksi secara acak. Performa agen terhadap lawan yang lebih strategis (misalnya agen Q-learning lain atau pemain manusia) belum diukur, sehingga tingkat generalisasi sebenarnya sulit dinilai.
+    \item \textbf{Satu kali \textit{run} per konfigurasi.} Karena elemen stokastik simulator, hasil satu \textit{run} per konfigurasi rentan terhadap variasi acak. Idealnya, setiap konfigurasi dijalankan minimal tiga kali dengan seed berbeda untuk memperoleh estimasi \textit{win rate} yang lebih stabil.
+    \item \textbf{Pool lawan yang diperluas belum diuji.} Setelah perluasan \textit{pool} lawan dari 30 menjadi 50 Pokémon, eksperimen dengan konfigurasi terbaik (\texttt{lam\_2.0}) belum diulang. Ada kemungkinan bahwa keragaman matchup yang lebih tinggi mempengaruhi kecepatan konvergensi atau jumlah state yang ditemukan.
+\end{itemize}
+
+%==============================================================================
+% BAB IV - PEMBAGIAN TUGAS & DEKLARASI KONTRIBUSI INDIVIDUAL
+%==============================================================================
+\chapter{PEMBAGIAN TUGAS \& DEKLARASI KONTRIBUSI INDIVIDUAL}
+\label{bab:kontribusi}
+
+\begin{petunjuk}
+\textbf{BAB INI WAJIB DITULIS SECARA MANDIRI OLEH MASING-MASING ANGGOTA} (bukan oleh ketua kelompok). Isi Sub-bab ini akan digunakan untuk men-generate pertanyaan ujian lisan yang personal. Klaim penguasaan konsep per anggota dideklarasikan dalam berkas \texttt{metadata.json} (field \texttt{konsep\_dikuasai\_*}) yang merupakan bagian tidak terpisahkan dari laporan ini.
+
+Gandakan template di bawah untuk setiap anggota (3--4 orang).
+\end{petunjuk}
+
+\section{[Nama Anggota 1] -- NPM. [xxxxxxxxxx]}
+
+\subsection*{IV.1.1 Komponen yang Dikerjakan}
+Daftar konkret bagian proyek yang menjadi tanggung jawab penuh saya:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Kode/modul:} [mis. \texttt{src/preprocessing/}, fungsi \texttt{train\_step()} di \texttt{src/train.py}]
+    \item \textbf{Bagian arsitektur:} [mis. \textit{attention layer}, \textit{replay buffer}, konstruksi graf]
+    \item \textbf{Bagian analisis:} [mis. \textit{confusion matrix}, \textit{ablation study}]
+    \item \textbf{Bagian laporan:} [mis. Bab II.3, Bab III.4]
+\end{itemize}
+
+\subsection*{IV.1.2 Pernyataan Penggunaan AI \textit{Assistant}}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Tool yang dipakai:} [mis. ChatGPT 5.1, Claude Opus 4.7, GitHub Copilot --- sebutkan tool \& versi]
+    \item \textbf{Untuk bagian apa:} [mis. \textit{debugging} CUDA OOM, \textit{drafting} paragraf \textit{related work}, eksplorasi ide]
+    \item \textbf{Tingkat ketergantungan:} [rendah / sedang / tinggi] (estimasi $\sim$[X]\% output berasal dari AI)
+    \item \textbf{Pernyataan:} Saya memahami dan dapat mempertanggungjawabkan setiap baris kode/teks yang saya klaim sebagai bagian saya.
+\end{itemize}
+
+%-------------------- Anggota 2 (gandakan blok di atas) ----------------------
+\section{Bonifasius Raditya Pandu Hendrianto -- NPM. 2306242350}
+
+\subsection*{IV.2.1 Komponen yang Dikerjakan}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Kode/modul:} \texttt{q\_learning\_agent.py}, \texttt{evaluate.py}, \texttt{visualize\_training.py}
+    \item \textbf{Bagian arsitektur:} Mengembangkan modul agen Q-learning dengan \emph{reward shaping} yang lebih detail pada \texttt{q\_learning\_agent.py}. Saya menambahkan komponen reward untuk damage, damage yang diterima, KO, faint, status, penalti waktu, dan \emph{potential-based reward} agar proses pembelajaran lebih informatif dan stabil. Selain itu, saya juga membantu memastikan pipeline evaluasi dan visualisasi terhubung dengan hasil training.
+    \item \textbf{Bagian analisis:} Menganalisis perilaku agen selama training dan evaluasi berdasarkan metrik win rate, ukuran Q-table, serta komponen reward. Pada \texttt{evaluate.py}, saya memastikan model yang sudah dilatih dapat diuji secara konsisten terhadap lawan acak untuk membandingkan performa antar Q-table. Pada \texttt{visualize\_training.py}, saya mendukung analisis hasil eksperimen melalui grafik kurva win rate, pertumbuhan Q-table, distribusi nilai Q, distribusi aksi terbaik, dan komposisi reward.
+    \item \textbf{Bagian laporan:} Menyusun narasi hasil eksperimen dan interpretasi performa model, termasuk penjelasan pengaruh \emph{reward shaping}, evaluasi terhadap lawan random, serta pembacaan grafik hasil training untuk menunjukkan perkembangan belajar agen dari waktu ke waktu.
+\end{itemize}
+
+\subsection*{IV.2.2 Pernyataan Penggunaan AI \textit{Assistant}}
+\begin{itemize}[leftmargin=*]
+  \item Tool yang dipakai: GPT 5.4 mini.
+  \item Untuk bagian apa: \texttt{src/evaluate.py} dan \textit{debugging}.
+  \item Tingkat ketergantungan: sedang (sekitar 39\%).
+  \item Pernyataan: Saya memahami dan dapat mempertanggungjawabkan setiap baris kode/teks yang saya klaim sebagai bagian saya.
+\end{itemize}
+
+%-------------------- Anggota 3 ---------------------------------------------
+\section{[Nama Anggota 3] -- NPM. [xxxxxxxxxx]}
+
+\subsection*{IV.3.1 Komponen yang Dikerjakan}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Kode/modul:} [\ldots]
+    \item \textbf{Bagian arsitektur:} [\ldots]
+    \item \textbf{Bagian analisis:} [\ldots]
+    \item \textbf{Bagian laporan:} [\ldots]
+\end{itemize}
+
+\subsection*{IV.3.2 Pernyataan Penggunaan AI \textit{Assistant}}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Tool yang dipakai:} [\ldots]
+    \item \textbf{Untuk bagian apa:} [\ldots]
+    \item \textbf{Tingkat ketergantungan:} [\ldots]
+    \item \textbf{Pernyataan:} Saya memahami dan dapat mempertanggungjawabkan setiap baris kode/teks yang saya klaim sebagai bagian saya.
+\end{itemize}
+
+%-------------------- Anggota 4 (jika ada, hapus jika hanya 3 anggota) ------
+% \section{[Nama Anggota 4] -- NPM. [xxxxxxxxxx]}
+% [\ldots gandakan blok di atas \ldots]
+
+%==============================================================================
+% BAB V - KESIMPULAN & PEKERJAAN LANJUTAN
+%==============================================================================
+\chapter{KESIMPULAN \& PEKERJAAN LANJUTAN}
+\label{bab:kesimpulan}
+
+\section{Kesimpulan}
+\begin{petunjuk}
+3--5 poin yang \textbf{menjawab langsung} rumusan masalah Bab I. Sertakan angka konkret (bukan klaim umum seperti ``model bekerja dengan baik''). Setiap poin dapat ditelusuri ke seksi tertentu di Bab III.
+\end{petunjuk}
+
+Berdasarkan rumusan masalah, implementasi, dan hasil eksperimen yang telah dilakukan, diperoleh kesimpulan sebagai berikut.
+
+\begin{enumerate}[leftmargin=*]
+    \item Terkait RM1, konsep \textit{reinforcement learning} berhasil diterapkan dalam sistem pengambilan keputusan berbasis \textit{Q-learning} melalui siklus interaksi antara \textit{agent} dan \textit{environment}. Pada setiap giliran, \textit{agent} mengamati \textit{state}, memilih \textit{action}, menerima \textit{reward}, lalu memperbarui nilai pada \textit{Q-table}. Implementasi ini dijalankan dengan konfigurasi awal 5000 \textit{training battle}, 500 \textit{evaluation battle}, \textit{learning rate} $\alpha = 0.10$, \textit{discount factor} $\gamma = 0.95$, dan \textit{softmax temperature} $\lambda = 1.0$. Dengan demikian, proses pengambilan keputusan sekuensial dapat dimodelkan melalui pembaruan nilai Q berdasarkan pengalaman yang diperoleh selama \textit{training}.
+
+    \item Terkait RM2, representasi \textit{state}, \textit{action}, dan \textit{reward} pada implementasi \textit{Q-learning} telah dirancang sederhana tetapi tetap relevan dengan kebutuhan \textit{Pokémon battle}. \textit{State} direpresentasikan sebagai tuple 6 elemen, yaitu \textit{HP bucket} Pokémon aktif milik \textit{agent}, \textit{HP bucket} Pokémon aktif lawan, serta tipe primer dan sekunder dari kedua Pokémon aktif. Nilai HP didiskretisasi ke dalam 10 \textit{bucket} dengan rentang 0--9. \textit{Action} dibatasi pada pemilihan \textit{move} yang tersedia, yaitu maksimal 4 \textit{move} per giliran. \textit{Reward} terdiri atas \textit{terminal reward} sebesar +100 untuk menang dan -100 untuk kalah, serta \textit{intermediate reward} berbasis selisih fraksi HP dengan rentang sekitar -5 sampai +5 per giliran. Representasi ini membuat ruang keputusan cukup kecil untuk \textit{tabular Q-learning}, tetapi masih mampu menangkap informasi penting dalam pertarungan.
+
+    \item Terkait RM3, hasil eksperimen menunjukkan bahwa implementasi \textit{Q-learning} mampu membentuk strategi \textit{agent} yang efektif pada skenario \textit{Pokémon battle} melawan \textit{random opponent}. Pada eksperimen awal, \textit{agent} memperoleh \textit{evaluation win rate} sebesar 93,2\% atau 466 kemenangan dari 500 pertarungan. Setelah dilakukan \textit{hyperparameter tuning}, konfigurasi terbaik mencapai \textit{evaluation win rate} sebesar 96,8\% atau 484 kemenangan dari 500 pertarungan. Meskipun demikian, implementasi ini masih memiliki keterbatasan, yaitu belum adanya \textit{switch Pokémon} sebagai bagian dari ruang \textit{action}, belum digunakannya fitur status kondisi seperti \textit{sleep} atau \textit{paralysis} dalam \textit{state}, serta evaluasi yang masih terbatas pada \textit{random opponent}.
+\end{enumerate}
+
+\section{Klaim Bonus Skor}
+\begin{petunjuk}
+Centang yang relevan; hapus seksi ini jika tidak mengklaim bonus.
+\end{petunjuk}
+
+\begin{itemize}[leftmargin=*]
+    \item[$\boxtimes$] \textbf{B1. Evaluasi Komparatif \& Iterasi} → bukti pada Subbab 3.4 dan 3.5
+    \item[$\boxtimes$] \textbf{B2. Dataset Mandiri} → bukti pada Subbab 3.1 + Lampiran B
+    \item[$\boxtimes$] \textbf{B3. Analisis Etika, Bias, \& Keterbatasan} → bukti pada Subbab 3.6 dan 3.7
+\end{itemize}
+
+\section{Pekerjaan Lanjutan (\textit{Future Work})}
+\begin{petunjuk}
+3--5 arah pengembangan yang \textbf{spesifik dan realistis} (bukan ``meningkatkan akurasi''). Mis. ``mengevaluasi pada dataset out-of-domain X'', ``mengganti backbone dengan ViT-B/16'', ``menambahkan modul interpretability Grad-CAM''.
+\end{petunjuk}
+
+\begin{enumerate}[leftmargin=*]
+    \item Menambahkan mekanisme \textit{switch Pokémon} sebagai bagian dari ruang \textit{action}. Pada implementasi saat ini, \textit{agent} hanya memilih \textit{move} yang tersedia, sehingga belum dapat melakukan pergantian Pokémon secara strategis ketika berada pada kondisi \textit{type disadvantage}. Pengembangan ini dapat dilakukan dengan memperluas ruang \textit{action} agar mencakup pilihan \textit{move} dan \textit{switch}.
+
+    \item Memperluas representasi \textit{state} dengan fitur status kondisi, seperti \textit{sleep}, \textit{paralysis}, \textit{poison}, \textit{burn}, dan \textit{freeze}. Fitur ini penting karena status kondisi dapat memengaruhi kemampuan Pokémon untuk bergerak, menerima \textit{damage}, atau bertahan dalam beberapa giliran berikutnya. Dengan penambahan fitur tersebut, \textit{agent} diharapkan dapat membedakan kondisi Pokémon yang sehat dan Pokémon yang sedang terkena status.
+
+    \item Memperluas \textit{custom opponent pool} dari 50 Pokémon Gen~1 ke seluruh 151 Pokémon Gen~1. Pengembangan ini bertujuan untuk menguji apakah \textit{policy} yang dipelajari tetap stabil ketika variasi \textit{matchup} meningkat. Evaluasi terhadap pool yang lebih luas juga dapat membantu mengukur kemampuan generalisasi \textit{agent} terhadap lawan yang belum sering ditemui selama \textit{training}.
+\end{enumerate}
+
+%==============================================================================
+% DAFTAR PUSTAKA
+%==============================================================================
+\printbibliography[heading=bibintoc,title={DAFTAR PUSTAKA}]
+
+%==============================================================================
+% LAMPIRAN
+%==============================================================================
+\appendix
+\renewcommand{\thechapter}{\Alph{chapter}}
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\centering}
+  {\appendixname\ \thechapter}{12pt}{\Large}
+
+%------ Lampiran A: Metadata JSON --------------------------------------------
+\chapter{Berkas Metadata Proyek (JSON)}
+\label{lamp:metadata}
+
+\begin{petunjuk}
+Tempelkan isi berkas \texttt{metadata.json} yang juga dikumpulkan terpisah. Berkas ini diumpan ke sistem agentic AI untuk men-generate pertanyaan ujian lisan. Ikuti skema pada \texttt{Template Metadata Proyek (JSON).md}.
+\end{petunjuk}
+
+\begin{lstlisting}[language=json]
+{
+  "kode_kelompok": "K00",
+  "topik_pilihan": 0,
+  "judul_proyek": "...",
+  "anggota": [
+    {
+      "nama": "...",
+      "npm": "...",
+      "konsep_dikuasai_implementasi": ["..."],
+      "konsep_dikuasai_teori": ["..."]
+    }
+  ]
+}
+\end{lstlisting}
+
+%------ Lampiran B: Tautan Repositori & Dataset ------------------------------
+\chapter{Tautan Repositori \& Dataset}
+\label{lamp:tautan}
+
+\begin{description}[leftmargin=4cm,labelwidth=3.5cm]
+    \item[GitHub repo:] \url{https://github.com/Tianrider/q-learning-pokemon-battle/tree/main}
+    % \item[Google Colab:] \url{https://colab.research.google.com/...}
+    \item[Dataset mandiri:] \url{https://github.com/Tianrider/q-learning-pokemon-battle/blob/main/src/teams.py}
+    \item[Video demo:] \url{...} (opsional)
+\end{description}
+
+\textbf{Status akses:} repositori publik / Colab dengan permission ``anyone with the link can view''. Sudah diverifikasi terbuka pada [tanggal].
+
+%------ Appendix C: Research Participation Consent Form (Informed Consent) ---
+% Section in English (rest of the report remains in Bahasa Indonesia).
+\renewcommand{\appendixname}{APPENDIX}
+
+\chapter{Research Participation Consent Form (\textit{Informed Consent})}
+\label{lamp:consent}
+
+\begin{petunjuk}
+\small
+\textbf{REQUIRED} to be signed by each group member before report submission. Declining participation (Option C) does not affect academic grades.
+\end{petunjuk}
+
+{\small
+\textbf{C.1\quad Brief Explanation.}
+\textit{Research:} Development \& validation of an \textit{agentic AI} framework for supporting academic oral examinations.
+\textit{Principal investigator:} [Name of course lecturer], Department of Computer Engineering, Universitas Indonesia. \textit{Co-investigator:} a final-year undergraduate student supervised by the principal investigator.
+\textit{Contact:} \texttt{[principal investigator's email]}. \textit{Ethics review status:} \textbf{under review}.
+\textit{Context:} data collection is conducted alongside the oral examination of the AI course's final assessment. The oral examination is held as part of the academic assessment regardless of the participant's research-participation choice.
+
+\textbf{C.2\quad Data Collected.}
+Final report (PDF) and \texttt{metadata.json} file; audio and video recordings of the oral examination; automatic transcripts derived from those recordings; lecturer's \textit{judgment} scores (\textit{ground truth}) and AI system's \textit{judgment} scores (test variable). \textbf{Not collected:} biometric data other than voice/face, or personal data beyond what is contained in the academic report.
+
+\textbf{C.3\quad Data Management.}
+\textbf{Participant names and student IDs (NPMs) will be stored anonymously} --- replaced with participant codes (\texttt{P001}, \texttt{P002}, \ldots) prior to analysis. The code-to-identity mapping table is stored separately, encrypted, and accessed only by the principal investigator. Publications (journal articles, conference papers, theses) will not contain individual identities. Data is stored with encryption on infrastructure managed by the research team; retention is 5 years after the research concludes, after which the data is permanently deleted. Access is limited to the principal and co-investigators; no third party may access without an amendment to this \textit{consent}.
+
+\textbf{C.4\quad Participant Rights.}
+(1)~The right to decline participation without affecting the course grade. (2)~The right to partial participation (e.g.\ report/metadata may be used, video recording may not). (3)~The right to withdraw data at any time \textbf{until 30 June 2026} by emailing the principal investigator with the subject \texttt{[Withdrawal] - [Name] - [NPM]}; confirmation of deletion is provided within $\le$~7 working days. After 30 June 2026 the data will have entered the analysis phase and withdrawal becomes impractical. (4)~The right to ask questions at any time to the principal investigator. (5)~The right to receive a summary of the research findings once they are published (sent to the registered email).
+
+\textbf{C.5\quad Individual Consent.}
+Each member completes their personal block on the following pages --- one page per member. Tick \textbf{exactly one} of the three options (A / B / C), then sign with a wet signature or an \textit{e-signature}.
+}
+
+%----------------------------------------------------------------------------
+% PER MEMBER — one page each
+%----------------------------------------------------------------------------
+\newcommand{\memberBlock}[1]{%
+\newpage
+\section*{Individual Consent --- Member #1}
+
+\noindent
+\begin{tabular}{p{0.28\textwidth}p{0.65\textwidth}}
+Full name        & : [Name of Member #1] \\
+Student ID (NPM) & : [xxxxxxxxxx] \\
+Email            & : [\ldots] \\
+\end{tabular}
+
+\vspace{1.5em}
+
+I have read Sections C.1--C.4 and understood their contents. I voluntarily choose the following option:
+
+\vspace{0.5em}
+
+\begin{itemize}[leftmargin=2em, label={$\square$}, itemsep=0.8em]
+    \item \textbf{Option A --- Full Participation.} I consent to the use of my report, metadata, \textbf{and} the audio and video recordings of my oral examination for research purposes.
+    \item \textbf{Option B --- Limited Participation.} I consent to the use of my report, metadata, and audio recording, \textbf{but I do not consent to the video recording} of my oral examination being used for research. (The video recording will be deleted after the academic assessment is completed.)
+    \item \textbf{Option C --- Decline Participation.} I decline to participate in the research. (The academic oral examination proceeds as usual; there is no consequence to the grade.)
+\end{itemize}
+
+\vfill
+
+\noindent
+\begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+\centering Participant's signature & \centering Witness / researcher's signature \tabularnewline[2.5cm]
+\centering (\hspace{4cm}) & \centering (\hspace{4cm}) \tabularnewline
+\centering Date: \hspace{3cm} & \centering Date: \hspace{3cm} \tabularnewline
+\end{tabular}
+
+\vspace{1em}
+}
+
+\memberBlock{1}
+\memberBlock{2}
+\memberBlock{3}
+\memberBlock{4}
+
+\end{document}

@@ -58,12 +58,6 @@ Starts the trained bot on the local Showdown server. Open `http://localhost:8000
 python src/visualize_training.py --input results/q_table_softmax.pkl
 ```
 
-You can also use a CSV training log (if available):
-
-```bash
-python src/visualize_training.py --input results/training_log.csv
-```
-
 Plots are saved under `results/plots/plot_[input_name]/`.
 
 ## Hyperparameter Tuning
