@@ -150,6 +150,17 @@ Grid search sweep over α, γ, and λ (one-at-a-time). All reward shaping parame
 - α is least sensitive — higher values (0.20, 0.30) hurt performance by overreacting to Gen 1 RNG
 - All configs exceed 93%, suggesting robustness comes largely from the fixed OU team
 
+### Q-table Visualization
+
+The trained Q-table was further analyzed using visualization outputs generated from the updated code. The visualizations include:
+
+- Mean Q-value per action index
+- Overall Q-value distribution
+- State value distribution based on max Q per state
+- Best action distribution per state
+
+These plots help inspect how the learned policy is distributed across action indices and how Q-values are concentrated after training. Most Q-values remain near zero, while a smaller number of state-action pairs obtain high positive values after repeated successful updates. The best-action distribution also shows that the agent does not rely on only one action index, although some action indices are preferred more often than others.
+
 ## Differences from Paper
 
 | Paper                          | This Project                           |
@@ -159,8 +170,22 @@ Grid search sweep over α, γ, and λ (one-at-a-time). All reward shaping parame
 | No accuracy/crit RNG           | Full Gen 1 RNG (accuracy, crits, etc.) |
 | 151 Pokemon, 165 moves         | Full Gen 1 via Showdown engine         |
 
+## Limitations
+
+1. **No strategic Pokemon switching** — The action space is limited to move selection only. As a result, the agent cannot explicitly respond to type disadvantage situations by switching to a more favorable Pokemon.
+
+2. **Limited state representation** — The current state representation only includes HP buckets and active Pokemon types. It does not include status conditions such as sleep, paralysis, poison, burn, or freeze, attack momentum, or the opponent's moveset information.
+
+3. **Evaluation against RandomPlayer only** — The evaluation is mainly conducted against opponents that choose actions randomly. The agent's performance against stronger rule-based agents, other trained agents, or human players has not been fully measured.
+
+4. **Single-run evaluation per configuration** — Because Pokemon Showdown includes stochastic mechanics such as move accuracy, critical hits, speed ties, and random opponent team composition, results from a single run may vary. Ideally, each configuration should be evaluated using multiple runs with different seeds.
+
+5. **Opponent pool is still limited** — The current custom opponent pool contains 50 Gen 1 Pokemon. Although this provides more variation than a smaller pool, it does not yet cover all 151 Gen 1 Pokemon. Expanding the pool may affect convergence speed, state coverage, and evaluation performance.
+
 ## Future Improvements
 
-1. **Increase opponent Pokemon team pool** — Expand the random opponent pool beyond the current 50 Gen 1 Pokemon to include all 151. This will expose the agent to a wider variety of type matchups and force it to generalize better, making the learned policy more robust against unseen teams.
+1. **Add strategic Pokemon switching as an action** — The current agent only chooses among the available moves, so it cannot strategically switch Pokemon when facing type disadvantage. A future version can expand the action space to include both move selection and Pokemon switching, allowing the agent to learn defensive and offensive pivoting strategies.
 
-2. **Add switch Pokemon action with type-effectiveness reward** — Currently the agent only chooses between its 4 available moves. Adding the ability to switch Pokemon as an action (expanding action space from 4 to up to 9) would allow the agent to learn strategic switches. A bonus reward should be given when switching to a Pokemon with a type advantage against the opponent's active Pokemon, encouraging the agent to learn defensive/offensive pivoting.
+2. **Extend the state representation with status conditions** — The current state representation mainly includes HP buckets and active Pokemon types. It does not explicitly include status conditions such as sleep, paralysis, poison, burn, or freeze. Adding these features to the state representation would help the agent distinguish between healthy Pokemon and Pokemon affected by status conditions.
+
+3. **Expand the custom opponent pool to all 151 Gen 1 Pokemon** — The current custom opponent pool contains 50 Gen 1 Pokemon. Expanding it to all 151 Gen 1 Pokemon would expose the agent to a wider range of matchups and help evaluate whether the learned policy remains stable when opponent diversity increases.
